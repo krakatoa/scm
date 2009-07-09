@@ -1,0 +1,18 @@
+.success
+  %fieldset
+    %legend= "Nuevo usuario"
+    - form_for @user, :url => users_path do |f|
+      - if f.error_messages.size > 0
+        .error= f.error_messages
+      = f.input_text :login, :label => "Usuario"
+      = f.input_text :nombre
+      = f.input_text :apellido
+      = f.input_password :password
+      = f.input_password :password_confirmation
+      %p
+        = f.label :user_kind, "Tipo de Usuario"
+        %br
+        = f.select :user_kind, User.kinds.collect { |c| [c, "#{c.gsub(' ', '')}User"] }
+      %p
+        = f.submit "Crear"
+    = link_to "Back", users_path

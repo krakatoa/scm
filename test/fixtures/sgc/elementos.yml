@@ -1,0 +1,361 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+baja:
+  id: 1
+  etiqueta: Baja
+  elemento_kind: ElementoFecha
+fecha_curso:
+  id: 2
+  etiqueta: Fecha Curso
+  elemento_kind: ElementoFecha
+curso_caba_60_horas:
+  id: 3
+  etiqueta: Curso CABA 60 Horas
+  elemento_kind: ElementoSimple
+  facturable: true
+curso_pba:
+  id: 4
+  etiqueta: Curso PBA
+  elemento_kind: ElementoSimple
+  facturable: true
+doble_curso:
+  id: 5
+  etiqueta: Doble Curso
+  elemento_kind: ElementoSimple
+  facturable: true
+curso_renovacion_caba_35_horas:
+  id: 6
+  etiqueta: Curso Renovacion CABA 35 Horas
+  elemento_kind: ElementoSimple
+  facturable: true
+psicologo:
+  id: 7
+  etiqueta: Psicologo
+  elemento_kind: ElementoConCosto
+clinico:
+  id: 8
+  etiqueta: Clinico
+  elemento_kind: ElementoConCosto
+laboratorio:
+  id: 9
+  etiqueta: Laboratorio
+  elemento_kind: ElementoConCosto
+reincidencia:
+  id: 10
+  etiqueta: Reincidencia
+  elemento_kind: ElementoConCosto
+antecedentes:
+  id: 11
+  etiqueta: Antecedentes
+  elemento_kind: ElementoConCosto
+huellas:
+  id: 12
+  etiqueta: Huellas
+  elemento_kind: ElementoConCosto
+alta_pcia_bs_as:
+  id: 13
+  etiqueta: Alta Pcia Bs As
+  elemento_kind: ElementoConCosto
+renovacion_pcia_bs_as:
+  id: 14
+  etiqueta: Renovacion Pcia Bs As
+  elemento_kind: ElementoConCosto
+ambiental:
+  id: 15
+  etiqueta: Ambiental
+  elemento_kind: ElementoConCosto
+certf_med_caba:
+  id: 16
+  etiqueta: Certf Med Caba
+  elemento_kind: ElementoConCosto
+certf_med_bs_as:
+  id: 17
+  etiqueta: Certf Med Bs As
+  elemento_kind: ElementoConCosto
+colegio_med_bs_as:
+  id: 18
+  etiqueta: Colegio Med Bs As
+  elemento_kind: ElementoConCosto
+certf_analitico:
+  id: 19
+  etiqueta: Certificado Analitico
+  elemento_kind: ElementoConCosto
+alta_caba:
+  id: 20
+  etiqueta: Alta CABA
+  elemento_kind: ElementoConCosto
+renovacion_caba:
+  id: 21
+  etiqueta: Renovacion CABA
+  elemento_kind: ElementoConCosto
+for1:
+  id: 22
+  etiqueta: For1
+  elemento_kind: ElementoConCosto
+for2:
+  id: 23
+  etiqueta: For2
+  elemento_kind: ElementoConCosto
+for3:
+  id: 24
+  etiqueta: For3
+  elemento_kind: ElementoConCosto
+for4:
+  id: 25
+  etiqueta: For4
+  elemento_kind: ElementoConCosto
+for5:
+  id: 26
+  etiqueta: For5
+  elemento_kind: ElementoConCosto
+for6:
+  id: 27
+  etiqueta: For6
+  elemento_kind: ElementoConCosto
+anx_4:
+  id: 28
+  etiqueta: Anx 4
+  elemento_kind: ElementoConCosto
+fisico_anexo_3:
+  id: 29
+  etiqueta: Fisico Anexo 3
+  elemento_kind: ElementoConCosto
+foto:
+  id: 30
+  etiqueta: foto
+  elemento_kind: ElementoConCosto
+foto_recibo_haber:
+  id: 31
+  etiqueta: Foto Recibo Haber
+  elemento_kind: ElementoConCosto
+form_anexo_3_idon_tiro_port:
+  id: 32
+  etiqueta: Form Anexo 3 Idon Tiro / Port
+  elemento_kind: ElementoConCosto
+anexo_6_idon_tiro_clu:
+  id: 33
+  etiqueta: Anexo 6 Idon Tiro CLU
+  elemento_kind: ElementoConCosto
+total_suma_gastada:
+  id: 34
+  etiqueta: Total Suma Gastada
+  elemento_kind: ElementoFormula
+  formula: "$3+$4+$5+$6+$7+$8+$9+$10+$11+$12+$13+$14+$15+$16+$17+$18+$19+$20+$21+$22+$23+$24+$25+$26+$27+$28+$29+$30+$31+$32+$33"
+gestion_y_tramites:
+  id: 35
+  etiqueta: Gestion y Tramites
+  elemento_kind: ElementoGestionTramites
+total_a_descontar_rrhh:
+  id: 36
+  etiqueta: Total a Descontar
+  elemento_kind: ElementoDescuentoRecursosHumanos
+
+#logistica
+vestuario_y_equipo:
+  id: 37
+  etiqueta: Vestuario y Equipo
+  elemento_kind: ElementoConBandera
+calzado:
+  id: 38
+  etiqueta: Calzado
+  elemento_kind: ElementoConBandera
+total_a_descontar_logistica:
+  id: 39
+  etiqueta: Total a Descontar
+  elemento_kind: ElementoDescuentoLogistica
+logistica-cuota_1:
+  id: 41
+  elemento_kind: ElementoCuotaLogistica
+  mes: 1
+  ano: 2009
+logistica-cuota_2:
+  id: 42
+  elemento_kind: ElementoCuotaLogistica
+  mes: 2
+  ano: 2009
+logistica-cuota_3:
+  id: 43
+  elemento_kind: ElementoCuotaLogistica
+  mes: 3
+  ano: 2009
+logistica-cuota_4:
+  id: 44
+  elemento_kind: ElementoCuotaLogistica
+  mes: 4
+  ano: 2009
+logistica-cuota_5:
+  id: 45
+  elemento_kind: ElementoCuotaLogistica
+  mes: 5
+  ano: 2009
+logistica-cuota_6:
+  id: 46
+  elemento_kind: ElementoCuotaLogistica
+  mes: 6
+  ano: 2009
+logistica-cuota_7:
+  id: 47
+  elemento_kind: ElementoCuotaLogistica
+  mes: 7
+  ano: 2009
+logistica-cuota_8:
+  id: 48
+  elemento_kind: ElementoCuotaLogistica
+  mes: 8
+  ano: 2009
+logistica-cuota_9:
+  id: 49
+  elemento_kind: ElementoCuotaLogistica
+  mes: 9
+  ano: 2009
+logistica-cuota_10:
+  id: 50
+  elemento_kind: ElementoCuotaLogistica
+  mes: 10
+  ano: 2009
+bajas_saldo_a_descontar:
+  id: 51
+  etiqueta: "Saldo a descontar"
+  elemento_kind: ElementoSimple
+bajas_descuento_realizado:
+  id: 52
+  etiqueta: "Descuento realizado"
+  elemento_kind: ElementoSimple
+bajas_diferencia:
+  id: 53
+  etiqueta: "Diferencia"
+  elemento_kind: ElementoFormula
+  formula: "$51-$52"
+rrhh-cuota_1:
+  id: 54
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 1
+  ano: 2009
+rrhh-cuota_2:
+  id: 55
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 2
+  ano: 2009
+rrhh-cuota_3:
+  id: 56
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 3
+  ano: 2009
+rrhh-cuota_4:
+  id: 57
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 4
+  ano: 2009
+rrhh-cuota_5:
+  id: 58
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 5
+  ano: 2009
+rrhh-cuota_6:
+  id: 59
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 6
+  ano: 2009
+rrhh-cuota_7:
+  id: 60
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 7
+  ano: 2009
+rrhh-cuota_8:
+  id: 61
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 8
+  ano: 2009
+rrhh-cuota_9:
+  id: 62
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 9
+  ano: 2009
+rrhh-cuota_10:
+  id: 63
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 10
+  ano: 2009
+resumen-cuota_1:
+  id: 64
+  etiqueta: Cuota 1-09
+  elemento_kind: ElementoFormula
+  formula: "$54+$41"
+resumen-cuota_2:
+  id: 65
+  etiqueta: Cuota 2-09
+  elemento_kind: ElementoFormula
+  formula: "$55+$42"
+resumen-cuota_3:
+  id: 66
+  etiqueta: Cuota 3-09
+  elemento_kind: ElementoFormula
+  formula: "$56+$43"
+resumen-cuota_4:
+  id: 67
+  etiqueta: Cuota 4-09
+  elemento_kind: ElementoFormula
+  formula: "$57+$44"
+resumen-cuota_5:
+  id: 68
+  etiqueta: Cuota 5-09
+  elemento_kind: ElementoFormula
+  formula: "$58+$45"
+resumen-cuota_6:
+  id: 69
+  etiqueta: Cuota 6-09
+  elemento_kind: ElementoFormula
+  formula: "$59+$46"
+resumen-cuota_7:
+  id: 70
+  etiqueta: Cuota 7-09
+  elemento_kind: ElementoFormula
+  formula: "$60+$47"
+resumen-cuota_8:
+  id: 71
+  etiqueta: Cuota 8-09
+  elemento_kind: ElementoFormula
+  formula: "$61+$48"
+resumen-cuota_9:
+  id: 72
+  etiqueta: Cuota 9-09
+  elemento_kind: ElementoFormula
+  formula: "$62+$49"
+resumen-cuota_10:
+  id: 73
+  etiqueta: Cuota 10-09
+  elemento_kind: ElementoFormula
+  formula: "$63+$50"
+
+# Cuota 11
+rrhh-cuota_11:
+  id: 74
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 11
+  ano: 2009
+logistica-cuota_11:
+  id: 75
+  elemento_kind: ElementoCuotaLogistica
+  mes: 11
+  ano: 2009
+resumen-cuota_11:
+  id: 76
+  etiqueta: Cuota 11-09
+  elemento_kind: ElementoFormula
+  formula: "$74+$75"
+
+# Cuota 12
+rrhh-cuota_12:
+  id: 77
+  elemento_kind: ElementoCuotaRecursosHumanos
+  mes: 12
+  ano: 2009
+logistica-cuota_11:
+  id: 78
+  elemento_kind: ElementoCuotaLogistica
+  mes: 12
+  ano: 2009
+resumen-cuota_11:
+  id: 79
+  etiqueta: Cuota 12-09
+  elemento_kind: ElementoFormula
+  formula: "$77+$78"

@@ -1,0 +1,10 @@
+.success
+  %fieldset
+    %legend= "Ingreso al Sistema"
+    - form_for @user_session, :url => user_session_path do |f|
+      - if f.error_messages.size > 0
+        .error= f.error_messages
+      = f.input_text :login, :label => "Usuario"
+      = f.input_password :password, :label => "Contrasena"
+      %p
+        = f.submit "Ingresar"

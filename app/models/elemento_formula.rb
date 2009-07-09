@@ -1,0 +1,2 @@
+class ElementoFormula < Elemento
+end

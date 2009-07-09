@@ -1,0 +1,11 @@
+#new_vigilador.new-record
+  - remote_form_for @vigilador, :url => vigiladores_path do |f|
+    %label= "Apellidos: "
+    = f.text_field :apellido, :style => "width: 80px;"
+    %label= "Nombres: "
+    = f.text_field :nombre, :style => "width: 100px;"
+    %label= "DNI: "
+    = f.text_field :dni, :style => "width: 80px;"
+    %button{:type => "submit"}
+      = image_tag("save.png")
+    = cancel_link

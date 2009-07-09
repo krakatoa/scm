@@ -1,0 +1,2 @@
+class ElementoGestionTramites < Elemento
+end

@@ -1,0 +1,7 @@
+- form_for :vigilador, :url => descontar_cuotas_vigilador_path(vigilador), :html => {:method => "post"} do |f|
+  = "Desde"
+  = select_month(Date.today, {:use_month_names => %w{Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre }, :prefix => 'descuento'}, {:style => "width: 70px;", :id => "descuento_mes"})
+  = text_field :descuento, :total, :style => "width: 40px;"
+  = hidden_field :descuento, :flags, :value => flags
+  = select :descuento, :cuotas, (1..12).collect{|c| [c.to_s, c] }
+  = submit_tag "Generar Descuentos"

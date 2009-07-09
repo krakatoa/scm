@@ -1,0 +1,8 @@
+- form_for :vigilador, :url => vigilador_path(@vigilador), :html => {:method => "put"} do |f|
+  %label= "Legajo: "
+  = f.text_field :legajo, :style => "width: 40px;"
+  %label= "Fecha Ingreso:"
+  = select_date(Date.today, {:use_month_names => %w{Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre }, :prefix => 'vigilador[fecha_ingreso]'})
+  %button{:type => "submit"}
+    = image_tag("save.png")
+  = cancel_alta_link(@vigilador.id)

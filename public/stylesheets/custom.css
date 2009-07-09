@@ -1,0 +1,35 @@
+.footer{
+	/*Sltyle something!*/
+}
+
+.new-record button {
+  background: transparent;
+  border: none;
+  margin:0px;
+  padding: 0px;
+  cursor: pointer;
+}
+/*
+#vigiladores_table label { cursor: text; }
+#vigiladores_table label:hover { background: #ff421c }
+*/
+
+a#link-new {
+  text-decoration: none;
+}
+
+a#link-new img {
+  vertical-align: middle;
+}
+
+.dato.facturado {
+  color: red;
+}
+
+.pagination a {
+  padding: 5px;
+}
+
+table tr:hover {
+  background: #e9ecd9;
+}

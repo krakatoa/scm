@@ -1,0 +1,25 @@
+- form_for(@vigilador) do |f|
+  = f.error_messages
+  %p
+    = f.label :legajo
+    %br
+    = f.text_field :legajo
+  %p
+    = f.label :apellido
+    %br
+    = f.text_field :apellido
+  %p
+    = f.label :nombre
+    %br
+    = f.text_field :nombre
+  %p
+    = f.label :dni
+    %br
+    = f.text_field :dni
+  %p
+    - if @vigilador.tipo_ingreso.normal?
+      = f.label :fecha_ingreso
+      %br
+      = select_date(@vigilador.fecha_ingreso, {:use_month_names => %w{Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre }, :prefix => 'vigilador[fecha_ingreso]'})
+  = f.submit "Guardar"
+= link_to 'Atras', vigiladores_path

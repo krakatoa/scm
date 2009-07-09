@@ -1,0 +1,3 @@
+class RecursosHumanosUser < User
+  
+end

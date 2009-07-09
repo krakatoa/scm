@@ -1,0 +1,24 @@
+!!! XML
+!!!
+%head
+  %meta{:'http-equiv'=>"content-type", :content => "text/html;charset=UTF-8"}
+  %title= "Sistema de Carga Multiusuario"
+  = stylesheet_link_tag "screen", :media => "screen, projection"
+  = stylesheet_link_tag "print", :media => "print"
+
+  = stylesheet_link_tag "plugins/fancy-type/screen.css", :media => "screen, projection"
+  = stylesheet_link_tag "plugins/tabs/screen.css", :media => "screen, projection"
+  = stylesheet_link_tag "custom", :media => "screen, projection"
+  = javascript_include_tag "jquery.min"
+  = javascript_include_tag "jquery-ui-1.7.1.custom.min"
+  = javascript_include_tag "application"
+  = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+%body
+  - if flash[:notice]
+    .notice= flash[:notice]
+  .container
+    %h1= "Sistema de Carga Multiusuario"
+    - if logged_in?
+      = link_to "Salir", logout_path
+    = yield
+  #working{:style => "display:none"}= "Procesando..."

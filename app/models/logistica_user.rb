@@ -1,0 +1,3 @@
+class LogisticaUser < User
+  
+end

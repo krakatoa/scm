@@ -1,0 +1,203 @@
+sgc:
+  sgc_1:
+    nombre: Veronica
+    apellido: Peralta
+    sector: RRHH
+  sgc_2:
+    nombre: Gustavo
+    apellido: Juan
+    sector: RRHH
+  sgc_3:
+    nombre: Gisela
+    apellido: Ramos
+    sector: RRHH
+  sgc_4:
+    nombre: Jorge
+    apellido: Frutos
+    sector: RRHH
+  sgc_5:
+    nombre: Andrea
+    apellido: Villalba
+    sector: Logistica
+  sgc_6:
+    nombre: Ariel
+    apellido: Romero
+    sector: Logistica
+  sgc_7:
+    nombre: Leonardo
+    apellido: Porco
+    sector: Admin
+  sgc_8:
+    nombre: Arturo
+    apellido: Centeno
+    sector: Admin
+  sgc_9:
+    nombre: Gabriel
+    apellido: Espinosa
+    sector: Admin
+  sgc_10:
+    nombre: Jorgelina
+    apellido: Ongaro
+    sector: Admin
+  sgc_11:
+    nombre: Jorge
+    apellido: Morando
+    sector: Sueldos
+  sgc_12:
+    nombre: Ricardo
+    apellido: Amestoy
+    sector: Sueldos
+  sgc_13:
+    nombre: Ricardo
+    apellido: Cano
+    sector: Sueldos
+  sgc_14:
+    nombre: Eduardo
+    apellido: Marion
+    sector: Admin
+  sgc_15:
+    nombre: Eduardo
+    apellido: Tossutti
+    sector: Contabilidad
+  sgc_16:
+    nombre: Luis
+    apellido: Coquet
+    sector: Contabilidad
+  sgc_17:
+    nombre: Carlos
+    apellido: Eluani
+    sector: Contabilidad
+hunter:
+  hunter_1:
+    nombre: Silvia
+    apellido: Adaro
+    sector: RRHH
+  hunter_2:
+    nombre: Enrique
+    apellido: Wotrich
+    sector: RRHH
+  hunter_3:
+    nombre: Gabriela
+    apellido: Zabala
+    sector: RRHH
+  hunter_4:
+    nombre: Analia
+    apellido: Lomartivo
+    sector: RRHH
+  hunter_5:
+    nombre: Carmen
+    apellido: Beaudean
+    sector: RRHH
+  hunter_6:
+    nombre: Carolina
+    apellido: Chavero
+    sector: RRHH
+  hunter_7:
+    nombre: Osvaldo
+    apellido: Isaguirre
+    sector: Logistica
+  hunter_8:
+    nombre: Florencia
+    apellido: Pena
+    sector: Admin
+  hunter_9:
+    nombre: Hector
+    apellido: Desmaras
+    sector: Admin
+  hunter_10:
+    nombre: Gabriel
+    apellido: Espinosa
+    sector: Admin
+  hunter_11:
+    nombre: Jorgelina
+    apellido: Ongaro
+    sector: Admin
+  hunter_12:
+    nombre: Patricia
+    apellido: Taborda
+    sector: Sueldos
+  hunter_13:
+    nombre: Victoria
+    apellido: Macoritto
+    sector: Sueldos
+  hunter_14:
+    nombre: Matias
+    apellido: Gomez
+    sector: Sueldos
+  hunter_15:
+    nombre: Ricardo
+    apellido: Amestoy
+    sector: Sueldos
+  hunter_16:
+    nombre: Ricardo
+    apellido: Cano
+    sector: Sueldos
+  hunter_17:
+    nombre: Eduardo
+    apellido: Marion
+    sector: Admin
+  hunter_18:
+    nombre: Alfredo
+    apellido: Diaz
+    sector: Contabilidad
+  hunter_19:
+    nombre: Alejandro
+    apellido: Oreste
+    sector: Contabilidad
+ci5:
+  ci5_1:
+    nombre: Jorge
+    apellido: Daura
+    sector: RRHH
+  ci5_2:
+    nombre: Jorge
+    apellido: Martinez
+    sector: RRHH
+  ci5_3:
+    nombre: Anibal
+    apellido: Da Silva
+    sector: RRHH
+  ci5_4:
+    nombre: Lorena
+    apellido: Escudero
+    sector: RRHH
+  ci5_5:
+    nombre: Adriana
+    apellido: Silva
+    sector: RRHH
+  ci5_6:
+    nombre: Gabriel
+    apellido: Pini
+    sector: Logistica
+  ci5_7:
+    nombre: Marina
+    apellido: Subosky
+    sector: Admin
+  ci5_8:
+    nombre: Gabriel
+    apellido: Espinosa
+    sector: Admin
+  ci5_9:
+    nombre: Jorgelina
+    apellido: Ongaro
+    sector: Admin
+  ci5_10:
+    nombre: Ivana
+    apellido: Breser
+    sector: Sueldos
+  ci5_11:
+    nombre: Fernanda
+    apellido: Herrera
+    sector: Sueldos
+  ci5_12:
+    nombre: Ricardo
+    apellido: Amestoy
+    sector: Sueldos
+  ci5_13:
+    nombre: Eduardo
+    apellido: Marion
+    sector: Admin
+  ci5_14:
+    nombre: Gustavo
+    apellido: Trulls
+    sector: Contabilidad

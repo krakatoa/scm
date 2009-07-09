@@ -1,0 +1,3 @@
+class SueldosUser < User
+  
+end

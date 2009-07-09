@@ -1,0 +1,4 @@
+= "Fecha:"
+= content_tag(:label, dato.fecha ? dato.fecha.strftime("%d-%m-%Y") : nil, :id => "dato_#{dato.id}_fecha", :name => "dato[#{dato.id}][fecha]", :class => "date editable", :style => "width: 50px;")
+= "Costo:" + content_tag(:label, dato.costo, :id => "dato_#{dato.id}_costo", :name => "dato[#{dato.id}][costo]", :style => "width: 50px;", :class => "editable")
+= render :partial => "common/elemento_facturable", :locals => { :dato => dato }

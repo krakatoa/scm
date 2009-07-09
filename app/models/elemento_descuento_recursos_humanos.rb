@@ -1,0 +1,2 @@
+class ElementoDescuentoRecursosHumanos < ElementoDescuento
+end

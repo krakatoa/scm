@@ -1,0 +1,2 @@
+class ElementoDescuentoLogistica < ElementoDescuento
+end

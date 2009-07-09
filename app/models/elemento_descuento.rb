@@ -1,0 +1,2 @@
+class ElementoDescuento < Elemento
+end

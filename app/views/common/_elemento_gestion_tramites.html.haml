@@ -1,0 +1,1 @@
+= "Costo: " + content_tag(:label, unless dato.costo.eql?(0) then dato.costo else link_to("aplicar", aplicar_gestion_tramites_vigilador_path(vigilador)) end, :id => "dato_#{dato.id}_costo", :name => "dato[#{dato.id}][costo]", :style => "width: 50px;")

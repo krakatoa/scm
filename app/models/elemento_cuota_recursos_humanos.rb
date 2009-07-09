@@ -1,0 +1,2 @@
+class ElementoCuotaRecursosHumanos < ElementoCuota
+end

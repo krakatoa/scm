@@ -1,0 +1,364 @@
+el1:
+  grupo_id: 6
+  elemento_id: 1
+el2:
+  grupo_id: 6
+  elemento_id: 2
+el3:
+  grupo_id: 6
+  elemento_id: 3
+el4:
+  grupo_id: 6
+  elemento_id: 4
+el5:
+  grupo_id: 6
+  elemento_id: 5
+el6:
+  grupo_id: 6
+  elemento_id: 6
+el7:
+  grupo_id: 6
+  elemento_id: 7
+el8:
+  elemento_id: 8
+  grupo_id: 6
+el9:
+  elemento_id: 9
+  grupo_id: 6
+el10:
+  elemento_id: 10
+  grupo_id: 6
+el11:
+  elemento_id: 11
+  grupo_id: 6
+el12:
+  elemento_id: 12
+  grupo_id: 6
+el13:
+  elemento_id: 13
+  grupo_id: 6
+el14:
+  elemento_id: 14
+  grupo_id: 6
+el15:
+  elemento_id: 15
+  grupo_id: 6
+el16:
+  elemento_id: 16
+  grupo_id: 6
+el17:
+  elemento_id: 17
+  grupo_id: 6
+el18:
+  elemento_id: 18
+  grupo_id: 6
+el19:
+  elemento_id: 19
+  grupo_id: 6
+el20:
+  elemento_id: 20
+  grupo_id: 6
+el21:
+  elemento_id: 21
+  grupo_id: 6
+el22:
+  elemento_id: 22
+  grupo_id: 6
+el23:
+  elemento_id: 23
+  grupo_id: 6
+el24:
+  elemento_id: 24
+  grupo_id: 6
+el25:
+  elemento_id: 25
+  grupo_id: 6
+el26:
+  elemento_id: 26
+  grupo_id: 6
+el27:
+  elemento_id: 27
+  grupo_id: 6
+el28:
+  elemento_id: 28
+  grupo_id: 6
+el29:
+  elemento_id: 29
+  grupo_id: 6
+el30:
+  elemento_id: 30
+  grupo_id: 6
+el31:
+  elemento_id: 31
+  grupo_id: 6
+el32:
+  elemento_id: 32
+  grupo_id: 6
+el33:
+  elemento_id: 33
+  grupo_id: 6
+el34:
+  elemento_id: 34
+  grupo_id: 6
+el35:
+  elemento_id: 35
+  grupo_id: 6
+el36:
+  elemento_id: 36
+  grupo_id: 17
+
+#logistica
+el37:
+  elemento_id: 37
+  grupo_id: 10
+el38:
+  elemento_id: 38
+  grupo_id: 10
+el39:
+  elemento_id: 39
+  grupo_id: 11
+el41:
+  elemento_id: 41
+  grupo_id: 11
+el42:
+  elemento_id: 42
+  grupo_id: 11
+el43:
+  elemento_id: 43
+  grupo_id: 11
+el44:
+  elemento_id: 44
+  grupo_id: 11
+el45:
+  elemento_id: 45
+  grupo_id: 11
+el46:
+  elemento_id: 46
+  grupo_id: 11
+el47:
+  elemento_id: 47
+  grupo_id: 11
+el48:
+  elemento_id: 48
+  grupo_id: 11
+el49:
+  elemento_id: 49
+  grupo_id: 11
+el50:
+  elemento_id: 50
+  grupo_id: 11
+el75:
+  elemento_id: 75
+  grupo_id: 11
+el78:
+  elemento_id: 78
+  grupo_id: 11
+
+#saldos
+el51:
+  elemento_id: 51
+  grupo_id: 14
+el52:
+  elemento_id: 52
+  grupo_id: 14
+el53:
+  elemento_id: 53
+  grupo_id: 14
+
+##rrhh cuotas
+el54:
+  elemento_id: 54
+  grupo_id: 17
+el55:
+  elemento_id: 55
+  grupo_id: 17
+el56:
+  elemento_id: 56
+  grupo_id: 17
+el57:
+  elemento_id: 57
+  grupo_id: 17
+el58:
+  elemento_id: 58
+  grupo_id: 17
+el59:
+  elemento_id: 59
+  grupo_id: 17
+el60:
+  elemento_id: 60
+  grupo_id: 17
+el61:
+  elemento_id: 61
+  grupo_id: 17
+el62:
+  elemento_id: 62
+  grupo_id: 17
+el63:
+  elemento_id: 63
+  grupo_id: 17
+el74:
+  elemento_id: 74
+  grupo_id: 17
+el74:
+  elemento_id: 77
+  grupo_id: 17
+##
+
+res-el1:
+  grupo_id: 2
+  elemento_id: 1
+res-el2:
+  grupo_id: 2
+  elemento_id: 2
+res-el3:
+  grupo_id: 2
+  elemento_id: 3
+res-el4:
+  grupo_id: 2
+  elemento_id: 4
+res-el5:
+  grupo_id: 2
+  elemento_id: 5
+res-el6:
+  grupo_id: 2
+  elemento_id: 6
+res-el7:
+  grupo_id: 2
+  elemento_id: 7
+res-el8:
+  elemento_id: 8
+  grupo_id: 2
+res-el9:
+  grupo_id: 2
+  elemento_id: 9
+res-el10:
+  grupo_id: 2
+  elemento_id: 10
+res-el11:
+  grupo_id: 2
+  elemento_id: 11
+res-el12:
+  grupo_id: 2
+  elemento_id: 12
+res-el13:
+  grupo_id: 2
+  elemento_id: 13
+res-el14:
+  grupo_id: 2
+  elemento_id: 14
+res-el15:
+  grupo_id: 2
+  elemento_id: 15
+res-el16:
+  grupo_id: 2
+  elemento_id: 16
+res-el17:
+  grupo_id: 2
+  elemento_id: 17
+res-el18:
+  grupo_id: 2
+  elemento_id: 18
+res-el19:
+  grupo_id: 2
+  elemento_id: 19
+res-el20:
+  grupo_id: 2
+  elemento_id: 20
+res-el21:
+  grupo_id: 2
+  elemento_id: 21
+res-el22:
+  grupo_id: 2
+  elemento_id: 22
+res-el23:
+  grupo_id: 2
+  elemento_id: 23
+res-el24:
+  grupo_id: 2
+  elemento_id: 24
+res-el25:
+  grupo_id: 2
+  elemento_id: 25
+res-el26:
+  grupo_id: 2
+  elemento_id: 26
+res-el27:
+  grupo_id: 2
+  elemento_id: 27
+res-el28:
+  grupo_id: 2
+  elemento_id: 28
+res-fisico_anexo_3:
+  grupo_id: 2
+  elemento_id: 29
+res-foto:
+  grupo_id: 2
+  elemento_id: 30
+res-foto_recibo_haber:
+  grupo_id: 2
+  elemento_id: 31
+res-form_anexo_3_idon_tiro_port:
+  grupo_id: 2
+  elemento_id: 32
+res-anexo_6_idon_tiro_clu:
+  grupo_id: 2
+  elemento_id: 33
+res-total_suma_gastada:
+  grupo_id: 2
+  elemento_id: 34
+res-gestion_y_tramites:
+  grupo_id: 2
+  elemento_id: 35
+  
+#logistica
+res-vestuario_y_equipo:
+  grupo_id: 2
+  elemento_id: 37
+res-calzado:
+  grupo_id: 2
+  elemento_id: 38
+res-cuota_1:
+  grupo_id: 18
+  elemento_id: 64
+res-cuota_2:
+  grupo_id: 18
+  elemento_id: 65
+res-cuota_3:
+  grupo_id: 18
+  elemento_id: 66
+res-cuota_4:
+  grupo_id: 18
+  elemento_id: 67
+res-cuota_5:
+  grupo_id: 18
+  elemento_id: 68
+res-cuota_6:
+  grupo_id: 18
+  elemento_id: 69
+res-cuota_7:
+  grupo_id: 18
+  elemento_id: 70
+res-cuota_8:
+  grupo_id: 18
+  elemento_id: 71
+res-cuota_9:
+  grupo_id: 18
+  elemento_id: 72
+res-cuota_10:
+  grupo_id: 18
+  elemento_id: 73
+res-cuota_11:
+  grupo_id: 18
+  elemento_id: 76
+res-cuota_12:
+  grupo_id: 18
+  elemento_id: 79
+res-bajas_saldo_a_descontar:
+  grupo_id: 2
+  elemento_id: 51
+res-bajas_descuento_realizado:
+  grupo_id: 2
+  elemento_id: 52
+res-bajas_diferencia:
+  grupo_id: 2
+  elemento_id: 53

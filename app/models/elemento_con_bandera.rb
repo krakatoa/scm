@@ -1,0 +1,2 @@
+class ElementoConBandera < Elemento
+end

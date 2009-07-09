@@ -1,0 +1,50 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+resumen_parent:
+  id: 1
+  namespace: resumen
+  etiqueta: Resumen
+  user_kinds: "AdminUser, ContabilidadUser, RecursosHumanosUser, LogisticaUser, SueldosUser"
+resumen1:
+  id: 2
+  etiqueta: Resumen
+  parent_id: 1
+rrhh_parent:
+  id: 5
+  namespace: recursos_humanos
+  etiqueta: RRHH
+  user_kinds: "AdminUser, ContabilidadUser, RecursosHumanosUser"
+rrhh1:
+  id: 6
+  etiqueta: Costos
+  parent_id: 5 #rrhh
+logistica_parent:
+  id: 9
+  namespace: logistica
+  etiqueta: Logistica
+  user_kinds: "AdminUser, ContabilidadUser, LogisticaUser"
+logistica1:
+  id: 10
+  etiqueta: Costos
+  parent_id: 9
+logistica2:
+  id: 11
+  etiqueta: Cuotas
+  parent_id: 9
+sueldos_parent:
+  id: 13
+  namespace: sueldos
+  etiqueta: Sueldos
+  user_kinds: "AdminUser, SueldosUser"
+sueldos1:
+  id: 14
+  etiqueta: Bajas
+  parent_id: 13
+rrh4:
+  id: 17
+  etiqueta: Cuotas
+  parent_id: 5
+resumen-cuotas:
+  id: 18
+  etiqueta: Cuotas
+  parent_id: 1

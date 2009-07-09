@@ -1,0 +1,28 @@
+%td
+  - if vigilador.nuevo? and (current_user.is_a? RecursosHumanosUser or current_user.is_a? ContabilidadUser or current_user.is_a? AdminUser)
+    %a{:href => alta_vigilador_path(vigilador), :class => "link-alta"}>= "Alta"
+    %br
+    %a{:href => no_ingreso_vigilador_path(vigilador), :class => "link-no_ingreso", :value => vigilador.id }>= "No Ingreso"
+%td{:id=>"alta_vigilador_#{vigilador.id}"}
+%td
+  %a{:href => edit_vigilador_path(vigilador), :class => "link-edit"}>= image_tag("edit.png")
+  - if current_user.is_a? SuperAdminUser
+    = link_to image_tag("user_edit.png"), edit_vigilador_path(vigilador)
+  %a{:href => vigilador_path(vigilador), :class => "link-save", :style => "display: none;"}>= image_tag("save.png")
+%td
+  = content_tag(:label, vigilador.legajo, :id => "vigilador_#{vigilador.id}", :name => "vigilador[legajo]", :style => "width: 80px;", :class => "personal")
+%td
+  = content_tag(:label, vigilador.apellido, :id => "vigilador_#{vigilador.id}", :name => "vigilador[apellido]", :style => "width: 80px;", :class => "personal")
+%td
+  = content_tag(:label, vigilador.nombre, :id => "vigilador_#{vigilador.id}", :name => "vigilador[nombre]", :style => "width: 80px;", :class => "personal")
+%td
+  = content_tag(:label, vigilador.dni, :id => "vigilador_#{vigilador.id}", :name => "vigilador[dni]", :style => "width: 80px;", :class => "personal")
+%td
+  - if vigilador.tipo_ingreso
+    - if vigilador.tipo_ingreso.normal?
+      = vigilador.fecha_ingreso.strftime("%d-%m-%Y")
+    - else
+      = vigilador.tipo_ingreso.etiqueta.titleize
+- if (vigilador.datos.size > 0)
+  - vigilador.datos.each do |dato|
+    %td{:class => "dato #{get_css(dato.elemento, dato)}"}= render_dato(vigilador, dato)

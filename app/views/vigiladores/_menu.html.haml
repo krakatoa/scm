@@ -1,0 +1,12 @@
+#tab-set
+  %ul.tabs
+    %li.label= "Menu"
+    - @grupos.each do |ge|
+      %li<
+        %a{:href => "#{eval("#{ge.namespace}_path")}" }>= ge.etiqueta
+  - @grupos.each do |ge|
+    %div{:id => "#{ge.namespace}"}
+      %ul.menuitem
+        - ge.children_groups.each do |cg|
+          %li<
+            %a{:href => "#{eval("#{cg.parent_group.namespace}_path")}#{cg.id}"}>= cg.etiqueta

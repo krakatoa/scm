@@ -1,0 +1,2 @@
+class ElementoFecha < Elemento
+end

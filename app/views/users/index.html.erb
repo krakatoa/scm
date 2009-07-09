@@ -1,0 +1,31 @@
+
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Login</th>
+    <th>Email</th>
+    <th>Kind</th>
+    <th>Last login ip</th>
+    <th>Current login ip</th>
+  </tr>
+
+<% if @users.size > 0 %>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%=h user.login %></td>
+      <td><%=h user.email %></td>
+      <td><%=h user.user_kind %></td>
+      <td><%=h user.last_login_ip %></td>
+      <td><%=h user.current_login_ip %></td>
+      <td><%#= link_to 'Show', user %></td>
+      <td><%#= link_to 'Edit', edit_user_path(user) %></td>
+      <td><%#= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user', new_user_path %>

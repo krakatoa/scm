@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#{deploy_to}/current/script/process/spawner \
+  thin start \
+  -p 3722 \
+  --environment=production \
+  --servers=1 \
+  --address=127.0.0.1 \
+  &
