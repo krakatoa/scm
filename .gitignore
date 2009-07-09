@@ -1,5 +1,6 @@
 *.log
 *.xls
+public/images/Icons/
 config/database.yml
 db/data/
 db/schema.rb
