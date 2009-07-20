@@ -1,3 +1,0 @@
-class SuperAdminUser < AdminUser
-  
-end

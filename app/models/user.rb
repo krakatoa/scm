@@ -48,4 +48,8 @@ class User < ActiveRecord::Base
     sizes[2].times{ ret << ("0".."9").to_a.rand }
     ret.sort_by { 1 - rand(3) }.join
   end
+
+  def has_super_edit?
+    self.super_edit
+  end
 end

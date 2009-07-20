@@ -6,7 +6,7 @@
 %td{:id=>"alta_vigilador_#{vigilador.id}"}
 %td
   %a{:href => edit_vigilador_path(vigilador), :class => "link-edit"}>= image_tag("edit.png")
-  - if current_user.is_a? SuperAdminUser
+  - if current_user.has_super_edit?
     = link_to image_tag("user_edit.png"), edit_vigilador_path(vigilador)
   %a{:href => vigilador_path(vigilador), :class => "link-save", :style => "display: none;"}>= image_tag("save.png")
 %td
