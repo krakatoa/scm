@@ -5,3 +5,5 @@
   = hidden_field :descuento, :flags, :value => flags
   = select :descuento, :cuotas, (1..12).collect{|c| [c.to_s, c] }
   = submit_tag "Generar Descuentos"
+- if current_user.has_super_edit?
+  = link_to "Editar Cuotas", vigilador_cuotas_path(vigilador)

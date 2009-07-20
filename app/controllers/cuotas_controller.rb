@@ -1,4 +1,5 @@
 class CuotasController < ApplicationController
+  before_filter :authorize_user
   before_filter :get_vigilador
 
   def index
@@ -19,6 +20,12 @@ class CuotasController < ApplicationController
   end
 
   private
+    def authorize_user
+      unless current_user.has_super_edit?
+        deny_access
+      end
+    end
+
     def get_vigilador
       @vigilador = Vigilador.find(params[:vigilador_id])
     end
