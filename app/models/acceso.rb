@@ -31,4 +31,19 @@ class Acceso < ActiveRecord::Base
 
   belongs_to :grupo
   belongs_to :elemento
+
+  def self.crear_accesos_a_cuota(elemento_cuota)
+    self.create!( :elemento => elemento_cuota,
+                    :grupo => Grupo.find(3),
+                    :campo => 'total',
+                    :acceso => "111111" ) # Solapa Resumen Cuotas
+    self.create!( :elemento => elemento_cuota,
+                    :grupo => Grupo.find(6),
+                    :campo => 'recursos_humanos',
+                    :acceso => "113137" ) # Solapa RRHH Cuotas
+    self.create!( :elemento => elemento_cuota,
+                    :grupo => Grupo.find(9),
+                    :campo => 'logistica',
+                    :acceso => "113317" ) # Solapa Logistica Cuotas
+  end
 end
