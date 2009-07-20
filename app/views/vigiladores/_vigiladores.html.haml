@@ -5,13 +5,12 @@
   %th{:style => "width:20px; background: transparent;" }
   %th{:style => "width:40px;"}= "Legajo"
   %th{:style => "width: 80px;"}= "Apellido"
-  =#%a{:href => "#", :class => "order_by"}= "Apellido"
   %th{:style => "width: 100px;"}= "Nombre"
-  =#%a{:href => "#", :class => "order_by"}= "Nombre"
   %th{:style => "width: 80px;"}= "DNI"
   %th{:style => "width: 80px;"}= "Fecha Ingreso"
-  - Elemento.all.each do |e|
-    %th{:style => "width: 40px;", :class => "dato #{get_css(e)}"}
+  - Acceso.all.each do |a|
+    - e = a.elemento
+    %th{:style => "width: 40px;", :class => "dato #{get_css(a)}"}
       = e.etiqueta
       - if e.is_a? ElementoGestionTramites
         %span#porcentaje_gestion_tramites= "#{VariacionPorcentajeGestion.porcentaje_actual}"

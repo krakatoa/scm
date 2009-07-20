@@ -1,2 +1,0 @@
-class ElementoCuotaLogistica < ElementoCuota
-end

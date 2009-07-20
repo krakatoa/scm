@@ -1,5 +1,5 @@
 module DatosHelper
-  def render_dato(vigilador, dato)
+  def render_dato(vigilador, dato, acceso)
     return render(:partial => "common/elemento_con_costo", :locals => { :dato => dato }) if dato.elemento.is_a? ElementoConCosto
     return render(:partial => "common/elemento_simple", :locals => { :dato => dato }) if dato.elemento.is_a? ElementoSimple
     return render(:partial => "common/elemento_formula", :locals => { :dato => dato }) if dato.elemento.is_a? ElementoFormula
@@ -9,14 +9,15 @@ module DatosHelper
     flags = (dato.elemento.is_a? ElementoDescuentoRecursosHumanos) ? "rrhh" : "logistica"
     return render(:partial => "common/elemento_descuento", :locals => { :vigilador => vigilador, :flags => flags }) if dato.elemento.is_a? ElementoDescuento
 
-    return render(:partial => "common/elemento_cuota", :locals => { :dato => dato }) if dato.elemento.is_a? ElementoCuota
+    return render(:partial => "common/elemento_cuota", :locals => { :dato => dato, :campo => acceso.campo }) if dato.elemento.is_a? ElementoCuota
     return render(:partial => "common/elemento_con_bandera", :locals => {:dato => dato}) if dato.elemento.is_a? ElementoConBandera
   end
 
-  def get_css(elemento, dato=nil)
+  def get_css(acceso, dato=nil)
     css = ""
-    elemento.grupos.each{ |grupo| css << " #{grupo.parent_group.namespace}_#{grupo.id}" }
-    if dato
+    grupo = acceso.grupo
+    css << " #{grupo.parent_group.namespace}_#{grupo.id}"
+    if dato and not dato.elemento.is_a? ElementoCuota
       css << " facturado" if dato.facturado?
     end
     css

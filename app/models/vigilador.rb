@@ -2,6 +2,7 @@ class Vigilador < ActiveRecord::Base
   set_table_name :vigiladores
 
   has_many :datos
+  has_many :cuotas
   belongs_to :tipo_ingreso
 
   validates_presence_of :apellido, :nombre, :dni, :message => "no puede estar en blanco"
@@ -10,9 +11,9 @@ class Vigilador < ActiveRecord::Base
   named_scope :with_user_editando, lambda { |user| { :conditions => { :editando => user } }}
 
   def after_create
-    # TODO se puede usar inject ? .. la posta seria que fuera por transacciones
     Elemento.all.each do |e|
-      Dato.create!(:vigilador => self, :elemento => e)
+      o = e.build_vigilador_dato(self)
+      o.save!
     end
   end
 
@@ -51,16 +52,16 @@ class Vigilador < ActiveRecord::Base
 
   def descontar_cuotas!(total, mes_inicial, flags, cant_cuotas=1)
     if flags == "rrhh"
-      clase_elemento = ElementoCuotaRecursosHumanos
+      campo = :recursos_humanos
     elsif flags == "logistica"
-      clase_elemento = ElementoCuotaLogistica
+      campo = :logistica
     end
     valor_cuota = total / cant_cuotas
-    a_descontar = self.datos.select{|d| (d.elemento.is_a? clase_elemento) && (d.elemento.mes >= mes_inicial) && (d.elemento.mes < mes_inicial + cant_cuotas) }
+    a_descontar = self.cuotas.select {|c| (c.elemento.mes >= mes_inicial) && (c.elemento.mes < mes_inicial + cant_cuotas)}
     return false if a_descontar.size != cant_cuotas
 
     a_descontar.each do |cuota|
-      cuota.costo = valor_cuota
+      cuota.write_attribute(campo, valor_cuota)
       cuota.save!
     end
   end

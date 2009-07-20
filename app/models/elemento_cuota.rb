@@ -1,10 +1,9 @@
 class ElementoCuota < Elemento
-  #def initialize
-  #  super
-  #  self.etiqueta = "Cuota #{self.mes}-#{self.ano}"
-  #end
-
   def etiqueta
-    "Cuota #{self.mes}-#{self.ano}"
+     "Cuota #{self.mes}-#{self.ano}"
+   end
+
+  def build_vigilador_dato(vigilador)
+    Cuota.new(:vigilador => vigilador, :elemento => self)
   end
 end

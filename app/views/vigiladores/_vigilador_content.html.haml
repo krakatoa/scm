@@ -23,6 +23,9 @@
       = vigilador.fecha_ingreso.strftime("%d-%m-%Y")
     - else
       = vigilador.tipo_ingreso.etiqueta.titleize
-- if (vigilador.datos.size > 0)
-  - vigilador.datos.each do |dato|
-    %td{:class => "dato #{get_css(dato.elemento, dato)}"}= render_dato(vigilador, dato)
+- Acceso.all.each do |a|
+  - if a.elemento.is_a? ElementoCuota
+    - dato = vigilador.cuotas.select{|d| d.elemento == a.elemento }.first
+  - else
+    - dato = vigilador.datos.select{|d| d.elemento == a.elemento }.first
+  %td{:class => "dato #{get_css(a, dato)}"}= render_dato(vigilador, dato, a)

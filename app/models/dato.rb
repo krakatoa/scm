@@ -4,42 +4,12 @@ class Dato < ActiveRecord::Base
 
   validates_presence_of :elemento_id, :vigilador_id
 
-#  named_scope :with_grupo_elementos, lambda { |ge| { :conditions => "elemento_id " } }
-
   def facturar!
     self.facturado = true
     self.save
   end
 
   def valor
-    # TODO bien no, pero esto no puede ir a parar a la clase Elemento, se me ocurre algo asi como que devuelva
-    # un proc de la manera de conseguir el valor,
-    # o tal vez pueda ir bien devolver un Symbol que aclare el campo a buscar:
-    # algo asi:
-    # self.read_attribute(self.elemento.campo)
-    #
-    # entonces, supongamos un dato con elemento ElementoFecha,
-    # con la clase para ElementoFecha definiendo un campo:
-    # def campo; :fecha; end
-    #
-    # el metodo para obtener el valor de un campo se traduciria en:
-    # 
-    # def valor
-    #   self.read_attribute(self.elemento.campo) => self.read_attribute(:fecha)
-    #
-    # para pensarlo, porque habria que ver como resolver las formulas
-    # YA SE!
-    # es sencillo,
-    #
-    # en ElementoFormula defino:
-    # def campo; self.formula; end
-    #
-    # Restaria definir,
-    # si el campo (ya no seria campo, pero no importa)
-    # Si el campo del elemento, es un simbolo,
-    # entonces traigo un atributo del dato
-    # si es una formula, la parseo y la resuelvo, usando los valores de cada uno de los datos
-    
     if self.elemento.is_a? ElementoConCosto
       return self.costo
     elsif self.elemento.is_a? ElementoSimple
@@ -47,14 +17,6 @@ class Dato < ActiveRecord::Base
     elsif self.elemento.is_a? ElementoFecha
       return self.fecha
     elsif self.elemento.is_a? ElementoFormula
-      # TODO primera version cabezoide, en este momento no me da para ponerme detallista :)
-      # hace falta planear un modulo de formulas
-      # que se manejen algo asi como:
-      # 
-      # $14 + 4 ==> dato.con_elemento(14)
-      # SUM( $(1..3) ) ==> dato.con_elemento(1) + dato.con_elemento(2) + dato.con_elemento(3)
-      #
-
       if self.elemento.formula.match(/\+/)
         operandos = self.elemento.formula.split(/\+/)
         operandos = operandos.collect { |o|

@@ -2,7 +2,8 @@ class Grupo < ActiveRecord::Base
   belongs_to :parent_group, :class_name => 'Grupo', :foreign_key=>"parent_id"
   has_many :children_groups, :class_name => 'Grupo', :foreign_key=>"parent_id"
 
-  has_and_belongs_to_many :elementos
+  has_many :accesos
+  has_many :elementos, :through => :accesos
 
   validates_presence_of :etiqueta
 
