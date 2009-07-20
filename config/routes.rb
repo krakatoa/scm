@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
                                             :no_ingreso => :get,
                                             :aplicar_gestion_tramites => :post,
                                             :descontar_cuotas => :post,
-                                            :desbloquear => :post }
+                                            :desbloquear => :post },
+                              :has_many => [:cuotas]
 
   map.modificar_porcentaje_gestion 'admin/modificar_porcentaje_gestion', :controller => "admin", :action => "modificar_porcentaje_gestion", :method => :post
 

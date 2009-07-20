@@ -1,0 +1,12 @@
+- form_for @cuota, :url => vigilador_cuota_path(@vigilador, @cuota), :html => { :method => :put } do |f|
+  = f.error_messages
+  %p
+    = f.label :recursos_humanos
+    %br
+    = f.text_field :recursos_humanos
+  %p
+    = f.label :logistica
+    %br
+    = f.text_field :logistica
+  = f.submit "Guardar"
+= link_to 'Atras', vigiladores_path

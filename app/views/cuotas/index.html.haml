@@ -1,0 +1,15 @@
+#cuotas
+  %table#vigiladores_table
+    %tr
+      %th= "Periodo"
+      %th= "Recursos Humanos"
+      %th= "Logistica"
+      %th
+    - if @cuotas.size > 0
+      - @cuotas.each do |cuota|
+        %tr
+          %td= cuota.elemento.etiqueta
+          %td= cuota.recursos_humanos
+          %td= cuota.logistica
+          %td= link_to "editar", edit_vigilador_cuota_path(@vigilador, cuota)
+= link_to 'Atras', vigiladores_path
