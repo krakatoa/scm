@@ -65,8 +65,9 @@ class VigiladoresController < ApplicationController
           hoja_vigiladores = workbook.add_worksheet("Vigiladores")
 
           headers = ['Legajo', 'Apellido', 'Nombre', 'DNI', 'Fecha Ingreso']
-          Grupo.find_by_id(1).children_groups.each{|c|
-            c.elementos.each {|e|
+          @grupo.children_groups.each{ |g|
+            g.accesos.each {|a|
+              e = a.elemento
               headers << e.etiqueta
               if e.is_a? ElementoConCosto
                 headers << "Costo"
@@ -91,13 +92,24 @@ class VigiladoresController < ApplicationController
               hoja_vigiladores.write(fila,4, vigilador.tipo_ingreso.etiqueta)
             end
             columna = 5
-            vigilador.datos.each do |dato|
-              if dato.elemento.is_a? ElementoFecha
-                hoja_vigiladores.write(fila, columna, dato.fecha.to_s)
-              else
-                hoja_vigiladores.write(fila, columna, dato.valor)
+
+            @grupo.children_groups.each do |g|
+              g.accesos.each do |a|
+                if a.elemento.is_a? ElementoCuota
+                  dato = vigilador.cuotas.select{|d| d.elemento == a.elemento}[0]
+                else
+                  dato = vigilador.datos.select{|d| d.elemento == a.elemento}[0]
+                end
+
+                if dato.elemento.is_a? ElementoFecha
+                  hoja_vigiladores.write(fila, columna, dato.fecha.to_s)
+                elsif dato.elemento.is_a? ElementoCuota
+                  hoja_vigiladores.write(fila, columna, dato.send(a.campo))
+                else
+                  hoja_vigiladores.write(fila, columna, dato.valor)
+                end
+                columna += 1
               end
-              columna += 1
             end
             fila += 1
           end
@@ -256,6 +268,11 @@ class VigiladoresController < ApplicationController
       Time.local(params[:year], params[:month], params[:day], hora, minuto, segundo)
     end
 
+    def get_namespace_y_grupo
+      @namespace = get_namespace(params, request)
+      @grupo = get_grupo(@namespace)
+    end
+
     def get_grupo(namespace=nil)
       grupo = nil
       if namespace.is_a? String
@@ -270,11 +287,6 @@ class VigiladoresController < ApplicationController
       end
       grupo ||= Grupo.all(:conditions => {:etiqueta => "Resumen", :parent_id => nil})[0]
       return grupo
-    end
-
-    def get_namespace_y_grupo
-      @namespace = get_namespace(params, request)
-      @grupo = get_grupo(@namespace)
     end
 
     def get_namespace(params, request)
