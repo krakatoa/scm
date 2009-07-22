@@ -31,7 +31,7 @@ class Dato < ActiveRecord::Base
         operandos = self.elemento.formula.split(/\-/)
         operandos = operandos.collect { |o|
           if o.match(/\$/)
-            self.vigilador.datos.select{|d| d.elemento.object_id == o.gsub("$", "").to_i}[0].costo
+            self.vigilador.datos.select{|d| d.elemento.id == o.gsub("$", "").to_i}[0].costo
           else
             o.to_i
           end
@@ -39,7 +39,7 @@ class Dato < ActiveRecord::Base
         return operandos[0] - operandos[1]
       elsif self.elemento.formula.match(/\*/)
         elemento_id, k = self.elemento.formula.split(/\*/)
-        return self.vigilador.datos.select{|d| d.elemento.object_id == elemento_id.to_i}[0].valor * k.to_f
+        return self.vigilador.datos.select{|d| d.elemento.id == elemento_id.to_i}[0].valor * k.to_f
       end
     elsif self.elemento.is_a? ElementoGestionTramites
       return self.costo
