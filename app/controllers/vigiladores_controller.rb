@@ -293,7 +293,16 @@ class VigiladoresController < ApplicationController
       valid_namespaces = %w{resumen recursos_humanos logistica sueldos}
       namespace_field = params[:namespace] if params.has_key?(:namespace) and not params[:namespace].blank? and valid_namespaces.include?(params[:namespace])
       request_action = params[:action] if params.has_key?(:action) and not params[:action].blank? and valid_namespaces.include?(params[:namespace])
-      referer = URI.parse(request.referer).path.gsub("/", "") if request.referer
+      referer_path = nil
+      if request.referer
+        referer_path = URI.parse(request.referer).path
+        if referer_path
+          referer_path.gsub!("pupisgc")
+          referer_path.gsub!("pupihunter")
+          referer_path.gsub!("pupici5")
+        end
+      end
+      referer = referer_path.gsub("/", "") if referer_path
       referer = nil if (referer.blank? or not valid_namespaces.include?(referer))
 
       namespace = nil
