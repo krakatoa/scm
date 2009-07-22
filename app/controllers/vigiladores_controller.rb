@@ -297,9 +297,9 @@ class VigiladoresController < ApplicationController
       if request.referer
         referer_path = URI.parse(request.referer).path
         if referer_path
-          referer_path.gsub!("pupisgc")
-          referer_path.gsub!("pupihunter")
-          referer_path.gsub!("pupici5")
+          referer_path.gsub!("pupisgc", "")
+          referer_path.gsub!("pupihunter", "")
+          referer_path.gsub!("pupici5", "")
         end
       end
       referer = referer_path.gsub("/", "") if referer_path
