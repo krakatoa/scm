@@ -33,7 +33,7 @@ function bind_links() {
             if (typeof(AUTH_TOKEN) == "undefined") return;
             $.ajax({
               type: "PUT",
-              url: "datos/"+dato_id,
+              url: "/datos/"+dato_id,
               data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN)+"&dato["+campo+"]="+valor,
               dataType: "script"
             });
@@ -59,7 +59,7 @@ function bind_links() {
       dataType: "script"
     });
     $("#vigilador_"+id).unbind("ajaxComplete");
-    $("#vigilador_"+id).load($(this).attr("href")).ajaxComplete(function() {
+    $("#vigilador_"+id).load("" + $(this).attr("href") + "?namespace="+get_namespace()).ajaxComplete(function() {
       bind_links();
     });
     $("a.link-edit").show();
@@ -83,14 +83,12 @@ function display_menu() {
   $("#tab-set > div").hide();
   $("#tab-set > div").eq(0).show();
 
-  $("ul.tabs a").click(function() {
-    var namespace = get_namespace($(this).attr("href"));
-    $("ul.tabs a.selected").removeClass('selected');
-    $("#tab-set > div").hide();
-    $("#"+namespace).fadeIn('slow');
-    $(this).addClass('selected');
-    return false;
-  });
+  var namespace = get_namespace(); //(window.location.toString());
+  $("ul.tabs a.selected").removeClass('selected');
+  $("#tab-set > div").hide();
+  $("#"+namespace).fadeIn('slow');
+  $(this).addClass('selected');
+
   $("ul.menuitem a").click(function() {
     var grupo = get_namespace_and_number($(this).attr("href"));
     $("ul.menuitem a.selected").removeClass("selected");
@@ -114,14 +112,18 @@ function get_first_id(url) {
   regexp = /\/\w+\/(\d+)/;
   return url.match(regexp)[1];
 }
-function get_namespace(url) {
+function get_namespace() {
+  var namespace = $("#namespace").attr('value');
+  return namespace
+}
+/*function get_namespace(url) {
   arr = url.split("/");
   var ind = arr.length - 1;
   while (arr[ind] == "") {
     ind--;
   };
   return arr[ind];
-}
+}*/
 function get_namespace_and_number(url) {
   regexp = /\/(\w+\/\d+)/;
   return url.match(regexp)[1].replace("/", "_");
@@ -132,7 +134,7 @@ function popup_modificacion_porcentaje() {
     if (typeof(AUTH_TOKEN) == "undefined") return;
     $.ajax({
       type: "POST",
-      url: "admin/modificar_porcentaje_gestion",
+      url: "/admin/modificar_porcentaje_gestion",
       data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN)+"&porcentaje="+valor,
       dataType: "script",
       async: false,

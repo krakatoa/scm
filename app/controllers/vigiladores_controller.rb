@@ -1,12 +1,14 @@
 class VigiladoresController < ApplicationController
   before_filter :require_user
   before_filter :authorize
+  before_filter :get_namespace_y_grupo
   before_filter :load_vigiladores
 
+  require 'uri'
   require 'spreadsheet/excel'
   include Spreadsheet
 
-  def index    
+  def index
     @grupos = Grupo.user_allowed(current_user).select {|ge| ge.parent_id == nil}
 
     begin
@@ -252,5 +254,41 @@ class VigiladoresController < ApplicationController
     def format_hasta(params); format_params_to_time(params, 11, 59, 59);  end
     def format_params_to_time(params, hora=0, minuto=0, segundo=0)
       Time.local(params[:year], params[:month], params[:day], hora, minuto, segundo)
+    end
+
+    def get_grupo(namespace=nil)
+      grupo = nil
+      if namespace.is_a? String
+        case namespace
+        when "recursos_humanos"
+          grupo = Grupo.all(:conditions => {:etiqueta => "RRHH", :parent_id => nil})[0]
+        when "logistica"
+          grupo = Grupo.all(:conditions => {:etiqueta => "Logistica", :parent_id => nil})[0]
+        when "sueldos"
+          grupo = Grupo.all(:conditions => {:etiqueta => "Sueldos", :parent_id => nil})[0]
+        end
+      end
+      grupo ||= Grupo.all(:conditions => {:etiqueta => "Resumen", :parent_id => nil})[0]
+      return grupo
+    end
+
+    def get_namespace_y_grupo
+      @namespace = get_namespace(params, request)
+      @grupo = get_grupo(@namespace)
+    end
+
+    def get_namespace(params, request)
+      valid_namespaces = %w{resumen recursos_humanos logistica sueldos}
+      namespace_field = params[:namespace] if params.has_key?(:namespace) and not params[:namespace].blank? and valid_namespaces.include?(params[:namespace])
+      request_action = params[:action] if params.has_key?(:action) and not params[:action].blank? and valid_namespaces.include?(params[:namespace])
+      referer = URI.parse(request.referer).path.gsub("/", "") if request.referer
+      referer = nil if (referer.blank? or not valid_namespaces.include?(referer))
+
+      namespace = nil
+      namespace ||= namespace_field if namespace_field
+      namespace ||= request_action if request_action
+      namespace ||= referer if referer
+      namespace ||= "resumen"
+      return namespace
     end
 end

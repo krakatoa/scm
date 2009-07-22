@@ -1,6 +1,7 @@
 %fieldset
   %legend= "Filtrar"
   - form_for @search, :url => vigiladores_path, :html => {:method => "get", :id => "filtrar_fecha_ingreso"} do |f|
+    = hidden_field_tag :namespace, @namespace
     %label= "Filtrar por:"
     = select_tag :filtrar, options_for_select([["Fecha Ingreso",0], ["Apellido",1], ["Nombre",2], ["Legajo", 3]])
     - f.fields_for @search.conditions do |vigiladores|
