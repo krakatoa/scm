@@ -2,8 +2,11 @@
   %legend= "Filtrar"
   - form_for @search, :url => vigiladores_path, :html => {:method => "get", :id => "filtrar_fecha_ingreso"} do |f|
     %label= "Filtrar por:"
-    = select_tag :filtrar, options_for_select([["Fecha Ingreso",0], ["Apellido",1], ["Nombre",2]])
+    = select_tag :filtrar, options_for_select([["Fecha Ingreso",0], ["Apellido",1], ["Nombre",2], ["Legajo", 3]])
     - f.fields_for @search.conditions do |vigiladores|
+      %br
+      %label= "Legajo"
+      = vigiladores.text_field :legajo_like
       %br
       %label= "Fecha Ingreso desde"
       = select_date(@search_fecha_ingreso_greater_than_or_equal_to ? @search_fecha_ingreso_greater_than_or_equal_to : Date.today, {:use_month_names => %w{Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre }, :prefix => 'search[conditions][fecha_ingreso_greater_than_or_equal_to]'})

@@ -24,6 +24,7 @@ class VigiladoresController < ApplicationController
     # 0 => Fecha Ingreso
     # 1 => Apellido
     # 2 => Nombre
+    # 3 => Legajo
     if params.has_key?(:search) and params[:search].has_key?(:conditions)
       unless params[:filtrar] == "0" # Fecha Ingreso
         params[:search][:conditions].delete(:fecha_ingreso_greater_than_or_equal_to) if params[:search][:conditions].has_key?(:fecha_ingreso_greater_than_or_equal_to)
@@ -34,6 +35,9 @@ class VigiladoresController < ApplicationController
       end
       unless params[:filtrar] == "2" # Nombre
         params[:search][:conditions].delete(:nombre_like) if params[:search][:conditions].has_key?(:nombre_like)
+      end
+      unless params[:filtrar] == "3" # Legajo
+        params[:search][:conditions].delete(:legajo_like) if params[:search][:conditions].has_key?(:nombre_like)
       end
     end
 
