@@ -114,7 +114,7 @@ function get_first_id(url) {
 }
 function get_namespace() {
   var namespace = $("#namespace").attr('value');
-  return namespace
+  return namespace;
 }
 /*function get_namespace(url) {
   arr = url.split("/");

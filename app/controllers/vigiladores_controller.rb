@@ -291,8 +291,8 @@ class VigiladoresController < ApplicationController
 
     def get_namespace(params, request)
       valid_namespaces = %w{resumen recursos_humanos logistica sueldos}
-      namespace_field = params[:namespace] if params.has_key?(:namespace) and not params[:namespace].blank? and valid_namespaces.include?(params[:namespace])
-      request_action = params[:action] if params.has_key?(:action) and not params[:action].blank? and valid_namespaces.include?(params[:namespace])
+      namespace_field = params["namespace"] if params.has_key?("namespace") and not params["namespace"].blank? and valid_namespaces.include?(params["namespace"])
+      request_action = params["action"] if params.has_key?("action") and not params["action"].blank? and valid_namespaces.include?(params["action"])
       referer_path = nil
       if request.referer
         referer_path = URI.parse(request.referer).path
@@ -310,6 +310,7 @@ class VigiladoresController < ApplicationController
       namespace ||= request_action if request_action
       namespace ||= referer if referer
       namespace ||= "resumen"
+
       return namespace
     end
 end
