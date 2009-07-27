@@ -1,8 +1,7 @@
 = render :partial => 'vigiladores/menu'
 = render :partial => "filtrar_fecha_ingreso"
 #vigiladores
-  %table#vigiladores_table
-    = render :partial => "vigiladores/vigiladores"
+  = render :partial => "vigiladores/vigiladores"
 = link_to_remote "Agregar nuevo vigilador #{image_tag("add.png")}", :url => new_vigilador_path, :method => "get", :html => { :id => "link-new" }
 %br
 = page_links

@@ -52,7 +52,10 @@ class VigiladoresController < ApplicationController
     @vigiladores = @search.all
 
     if request.xhr?
-      render :partial => "vigiladores/vigiladores"
+      render :update do |page|
+        page.replace_html "vigiladores", :partial => "vigiladores"
+        page.replace_html "xls_export", xls_export_link(:action => @namespace)
+      end
     else
       respond_to do |wants|
         wants.html {

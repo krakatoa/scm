@@ -1,8 +1,16 @@
 module SearchHelper
-  # Searchgasm helpers
-  def remote_order_by_link_display_working(options, html_options = {})
-    html_options.merge!(:remote => display_working_options)
-    remote_order_by_link(options, html_options)
+  def xls_export_link(options={})
+    options.merge!(:search => params[:search])
+    export_link :xls, options
+  end
+
+  def export_link(format, options={})
+    content_tag(:span,
+                link_to("Exportar #{format}",
+                  :action => if options[:action] then options[:action] else action_name end,
+                  :format => format,
+                  :search => if options[:search] then options[:search] else nil end),
+                :id => "#{format}_export")
   end
 
   def remote_page_links_display_working
@@ -11,11 +19,6 @@ module SearchHelper
 
   def remote_per_page_select_display_working(options)
     remote_per_page_select(options)
-  end
-
-  def observe_form_display_working(form_id, options={})
-    options.merge!({:method => :get})
-    observe_form(form_id, options.merge(display_working_options))
   end
 
   def search_page_selector(data_type="")
