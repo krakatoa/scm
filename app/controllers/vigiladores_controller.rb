@@ -11,35 +11,49 @@ class VigiladoresController < ApplicationController
   def index
     @grupos = Grupo.user_allowed(current_user).select {|ge| ge.parent_id == nil}
 
+    # TODO Refactorizar filtros ! :) JS tambien :)
     begin
-      @search_fecha_ingreso_greater_than_or_equal_to = format_desde(params[:search][:conditions][:fecha_ingreso_greater_than_or_equal_to])
-      params[:search][:conditions][:fecha_ingreso_greater_than_or_equal_to] = @search_fecha_ingreso_greater_than_or_equal_to
+      params[:search][:conditions][:fecha_ingreso_greater_than_or_equal_to] = format_desde(params[:search][:conditions][:fecha_ingreso_greater_than_or_equal_to])
     rescue
     end
 
     begin
-      @search_fecha_ingreso_less_than_or_equal_to = format_hasta(params[:search][:conditions][:fecha_ingreso_less_than_or_equal_to])
-      params[:search][:conditions][:fecha_ingreso_less_than_or_equal_to] = @search_fecha_ingreso_less_than_or_equal_to
+      params[:search][:conditions][:fecha_ingreso_less_than_or_equal_to] = format_hasta(params[:search][:conditions][:fecha_ingreso_less_than_or_equal_to])
+    rescue
+    end
+
+    begin
+      params[:search][:conditions][:datos][:fecha_greater_than_or_equal_to] = format_desde(params[:search][:conditions][:datos][:fecha_greater_than_or_equal_to])
+    rescue
+    end
+
+    begin
+      params[:search][:conditions][:datos][:fecha_less_than_or_equal_to] = format_desde(params[:search][:conditions][:datos][:fecha_less_than_or_equal_to])
     rescue
     end
 
     # 0 => Fecha Ingreso
-    # 1 => Apellido
-    # 2 => Nombre
-    # 3 => Legajo
+    # 1 => Fecha Baja
+    # 2 => Apellido
+    # 3 => Nombre
+    # 4 => Legajo
     if params.has_key?(:search) and params[:search].has_key?(:conditions)
-      unless params[:filtrar] == "0" # Fecha Ingreso
+      unless params[:filtrar] == "0" # Legajo
+        params[:search][:conditions].delete(:legajo_like) if params[:search][:conditions].has_key?(:nombre_like)
+      end
+      unless params[:filtrar] == "1" # Fecha Ingreso
         params[:search][:conditions].delete(:fecha_ingreso_greater_than_or_equal_to) if params[:search][:conditions].has_key?(:fecha_ingreso_greater_than_or_equal_to)
         params[:search][:conditions].delete(:fecha_ingreso_less_than_or_equal_to) if params[:search][:conditions].has_key?(:fecha_ingreso_less_than_or_equal_to)
       end
-      unless params[:filtrar] == "1" # Apellido
+      unless params[:filtrar] == "2" # Fecha Baja
+        params[:search][:conditions][:datos].delete(:fecha_greater_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_greater_than_or_equal_to)
+        params[:search][:conditions][:datos].delete(:fecha_less_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_less_than_or_equal_to)
+      end
+      unless params[:filtrar] == "3" # Apellido
         params[:search][:conditions].delete(:apellido_like) if params[:search][:conditions].has_key?(:apellido_like)
       end
-      unless params[:filtrar] == "2" # Nombre
+      unless params[:filtrar] == "4" # Nombre
         params[:search][:conditions].delete(:nombre_like) if params[:search][:conditions].has_key?(:nombre_like)
-      end
-      unless params[:filtrar] == "3" # Legajo
-        params[:search][:conditions].delete(:legajo_like) if params[:search][:conditions].has_key?(:nombre_like)
       end
     end
 
