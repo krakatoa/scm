@@ -2,11 +2,16 @@ class Grupo < ActiveRecord::Base
   belongs_to :parent_group, :class_name => 'Grupo', :foreign_key=>"parent_id"
   has_many :children_groups, :class_name => 'Grupo', :foreign_key=>"parent_id"
 
-  has_many :accesos
+  has_many :accesos, :include => [:elemento]
   has_many :elementos, :through => :accesos
+
+  named_scope :parents, {:conditions => {:parent_id => nil}}
 
   validates_presence_of :etiqueta
 
+  #@@menues = Grupo.children_groups.all(:include => :accesos).collect
+  #def self.menues; @@menues; end
+  
   # TODO validates_presence_of "controller" if parent?
 
   def allowed_user_kinds

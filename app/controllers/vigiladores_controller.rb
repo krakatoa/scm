@@ -9,7 +9,7 @@ class VigiladoresController < ApplicationController
   include Spreadsheet
 
   def index
-    @grupos = Grupo.user_allowed(current_user).select {|ge| ge.parent_id == nil}
+    @grupos = Grupo.parents.user_allowed(current_user)
 
     # TODO Refactorizar filtros ! :) JS tambien :)
     begin

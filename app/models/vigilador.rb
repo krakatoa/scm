@@ -1,14 +1,15 @@
 class Vigilador < ActiveRecord::Base
   set_table_name :vigiladores
 
-  has_many :datos
-  has_many :cuotas
+  has_many :datos, :include => [:elemento]
+  has_many :cuotas, :include => [:elemento]
   belongs_to :tipo_ingreso
 
   validates_presence_of :apellido, :nombre, :dni, :message => "no puede estar en blanco"
   validates_uniqueness_of :dni, :message => "ingresado ya existe"
 
   named_scope :with_user_editando, lambda { |user| { :conditions => { :editando => user } }}
+  named_scope :no_ingreso, :conditions => ["tipo_ingreso_id = ?", TipoIngreso.find_by_etiqueta("no ingreso").id]
 
   def after_create
     Elemento.all.each do |e|
