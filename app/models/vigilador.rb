@@ -9,7 +9,8 @@ class Vigilador < ActiveRecord::Base
   validates_uniqueness_of :dni, :message => "ingresado ya existe"
 
   named_scope :with_user_editando, lambda { |user| { :conditions => { :editando => user } }}
-  named_scope :no_ingreso, :conditions => ["tipo_ingreso_id = ?", TipoIngreso.find_by_etiqueta("no ingreso").id]
+  # TODO check! @@
+  named_scope :no_ingreso, :conditions => ["tipo_ingreso_id = ?", TipoIngreso.no_ingreso_id]
 
   def after_create
     Elemento.all.each do |e|
@@ -33,18 +34,19 @@ class Vigilador < ActiveRecord::Base
   end
 
   def no_ingreso!
-    self.tipo_ingreso = TipoIngreso.find_by_etiqueta("no ingreso")
+    self.tipo_ingreso_id = TipoIngreso.no_ingreso_id
     self.save
   end
 
   def no_ingreso?
-    self.tipo_ingreso == TipoIngreso.find_by_etiqueta("no ingreso")
+    self.tipo_ingreso == TipoIngreso.no_ingreso_id
   end
 
   def aplicar_gestion_tramites!
     id_total_suma_gastada = 34 # deberia estar referenciado desde el mismo campo de GestionTramites (en el YAML de elementos)
 
-    total_suma_gastada_dato = self.datos.select{|d| d.elemento.id == id_total_suma_gastada}[0]
+    # TODO Check queries!
+    total_suma_gastada_dato = self.datos.select{|d| d.read_attribute(:elemento_id) == id_total_suma_gastada}[0]
     gestion_tramites_dato = self.datos.select{|d| d.elemento.is_a? ElementoGestionTramites}[0]
     #gestion_tramites_dato = self.datos.select{|d| d.id == gestion_dato_id}[0]
     gestion_tramites_dato.costo = total_suma_gastada_dato.valor + ((total_suma_gastada_dato.valor * VariacionPorcentajeGestion.porcentaje_actual) / 100).to_i

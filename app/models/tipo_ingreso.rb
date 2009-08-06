@@ -3,7 +3,17 @@ class TipoIngreso < ActiveRecord::Base
 
   validates_presence_of :etiqueta
 
-  @@tipos_ingreso = ["normal", "no ingreso", "renovacion", "perdida"]
+  #@@tipos_ingreso = TipoIngreso.all.collect{|t| t.etiqueta}#["normal", "no ingreso", "renovacion", "perdida"]
+
+  @@tipos_ingreso = []
+  TipoIngreso.all.each do |tipo_ingreso|
+    @@tipos_ingreso.push tipo_ingreso.etiqueta
+    eval %{
+      def self.#{tipo_ingreso.etiqueta.gsub(" ", "_")}_id
+        #{tipo_ingreso.id}
+      end
+    }
+  end
 
   def self.tipos_ingreso
     @@tipos_ingreso
