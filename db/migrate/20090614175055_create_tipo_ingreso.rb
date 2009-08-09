@@ -5,9 +5,11 @@ class CreateTipoIngreso < ActiveRecord::Migration
     end
     add_index "tipos_ingreso", ["etiqueta"]
 
-    TipoIngreso.tipos_ingreso.each do |tipo_ingreso|
-      TipoIngreso.create(:etiqueta => tipo_ingreso)
-    end
+    TipoIngreso.create(:etiqueta => "normal")
+    TipoIngreso.create(:etiqueta => "no ingreso")
+    TipoIngreso.create(:etiqueta => "renovacion")
+    TipoIngreso.create(:etiqueta => "perdida")
+    load 'tipo_ingreso.rb'
   end
 
   def self.down

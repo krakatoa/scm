@@ -9,7 +9,6 @@ class Vigilador < ActiveRecord::Base
   validates_uniqueness_of :dni, :message => "ingresado ya existe"
 
   named_scope :with_user_editando, lambda { |user| { :conditions => { :editando => user } }}
-  # TODO check! @@
   named_scope :no_ingreso, :conditions => ["tipo_ingreso_id = ?", TipoIngreso.no_ingreso_id]
 
   def after_create
