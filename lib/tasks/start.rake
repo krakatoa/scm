@@ -5,7 +5,6 @@ namespace :db do
     Rake::Task["db:create"].invoke
     
     Rake::Task["db:migrate"].invoke
-    #Rake::Task["db:fixtures:load"].invoke
     Rake::Task["db:vigiladores:preparar_csv"].invoke
     Rake::Task["db:vigiladores:cargar_csv"].invoke
 
