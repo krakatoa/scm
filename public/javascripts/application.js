@@ -87,7 +87,7 @@ function display_menu() {
   $("ul.tabs a.selected").removeClass('selected');
   $("#tab-set > div").hide();
   $("#"+namespace).fadeIn('slow');
-  $(this).addClass('selected');
+  $("ul.tabs a[name='"+ namespace +"']").addClass('selected');
 
   $("ul.menuitem a").click(function() {
     var grupo = get_namespace_and_number($(this).attr("href"));
