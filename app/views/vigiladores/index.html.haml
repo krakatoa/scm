@@ -1,4 +1,5 @@
-= render :partial => 'vigiladores/menu'
+#tab-set
+  = render :partial => 'vigiladores/menu', :locals => { :grupos => @grupos }
 = render :partial => "filtrar_fecha_ingreso"
 #vigiladores
   = render :partial => "vigiladores/vigiladores"

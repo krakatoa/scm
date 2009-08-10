@@ -1,12 +1,11 @@
-#tab-set
-  %ul.tabs
-    %li.label= "Menu"
-    - @grupos.each do |ge|
-      %li<
-        %a{:href => "#{eval("#{ge.namespace}_path")}" }>= ge.etiqueta
-  - @grupos.each do |ge|
-    %div{:id => "#{ge.namespace}"}
-      %ul.menuitem
-        - ge.children_groups.each do |cg|
-          %li<
-            %a{:href => "#{eval("#{cg.parent_group.namespace}_path")}#{cg.id}"}>= cg.etiqueta
+%ul.tabs
+  %li.label= "Menu"
+  - grupos.each do |ge|
+    %li<
+      = link_to_remote ge.etiqueta, { :url => { :action => ge.namespace, :search => params[:search] }, :method => "get", :html => {:name => "#{ge.namespace}"} }
+- grupos.each do |ge|
+  %div{:id => "#{ge.namespace}"}
+    %ul.menuitem
+      - ge.children_groups.each do |cg|
+        %li<
+          %a{:href => "#{eval("#{cg.parent_group.namespace}_path")}#{cg.id}"}>= cg.etiqueta

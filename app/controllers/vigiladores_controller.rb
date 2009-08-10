@@ -9,6 +9,7 @@ class VigiladoresController < ApplicationController
   include Spreadsheet
 
   def index
+    original_params = params
     @grupos = Grupo.parents.user_allowed(current_user)
 
     # TODO Refactorizar filtros ! :) JS tambien :)
@@ -46,8 +47,10 @@ class VigiladoresController < ApplicationController
         params[:search][:conditions].delete(:fecha_ingreso_less_than_or_equal_to) if params[:search][:conditions].has_key?(:fecha_ingreso_less_than_or_equal_to)
       end
       unless params[:filtrar] == "2" # Fecha Baja
-        params[:search][:conditions][:datos].delete(:fecha_greater_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_greater_than_or_equal_to)
-        params[:search][:conditions][:datos].delete(:fecha_less_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_less_than_or_equal_to)
+        if params[:search][:conditions].has_key? :datos
+          params[:search][:conditions][:datos].delete(:fecha_greater_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_greater_than_or_equal_to)
+          params[:search][:conditions][:datos].delete(:fecha_less_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_less_than_or_equal_to)
+        end
       end
       unless params[:filtrar] == "3" # Apellido
         params[:search][:conditions].delete(:apellido_like) if params[:search][:conditions].has_key?(:apellido_like)
@@ -62,13 +65,15 @@ class VigiladoresController < ApplicationController
       @search.order_by = [ :apellido ]
       @search.order_as = 'ASC'
     end
-    @search.per_page = 5
     @vigiladores = @search.all
 
     if request.xhr?
       render :update do |page|
+        Vigilador.with_user_editando(current_user_session.user).each(&:desbloquear!)
+        page[:'tab-set'].replace_html :partial => "menu", :locals => { :grupos => @grupos }
+        page.replace "namespace", "<input type=\"hidden\" value=\"#{@namespace}\" name=\"namespace\" id=\"namespace\"/>"
         page.replace_html "vigiladores", :partial => "vigiladores"
-        page.replace_html "xls_export", xls_export_link(:action => @namespace)
+        page.replace_html "xls_export", xls_export_link(:action => @namespace, :search => original_params[:search])
       end
     else
       respond_to do |wants|
