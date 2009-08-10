@@ -1,6 +1,7 @@
 module SearchHelper
   def xls_export_link(options={})
     options.merge!(:search => options[:search])
+    options.merge!(:filtrar => options[:filtrar])
     export_link :xls, options
   end
 
