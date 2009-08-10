@@ -60,8 +60,8 @@ class VigiladoresController < ApplicationController
       end
     end
 
-    @search = Vigilador.new_search(params[:search])
     if params.has_key? :filtrar
+      @search = Vigilador.new_search(params[:search])
       if @search.order_by.blank? and @search.order_as.blank?
         @search.order_by = [ :apellido ]
         @search.order_as = 'ASC'
@@ -69,6 +69,7 @@ class VigiladoresController < ApplicationController
       @search.per_page = nil
       @vigiladores = @search.all
     else
+      @search = Vigilador.new_search
       @vigiladores = []
     end
 
