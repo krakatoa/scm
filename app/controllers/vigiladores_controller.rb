@@ -65,6 +65,7 @@ class VigiladoresController < ApplicationController
       @search.order_by = [ :apellido ]
       @search.order_as = 'ASC'
     end
+    @search.per_page = nil
     @vigiladores = @search.all
 
     if request.xhr?
