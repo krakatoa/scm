@@ -19,7 +19,7 @@
   = content_tag(:label, vigilador.dni, :id => "vigilador_#{vigilador.id}", :name => "vigilador[dni]", :style => "width: 80px;", :class => "personal")
 %td
   - if vigilador.tipo_ingreso
-    - if vigilador.tipo_ingreso.normal?
+    - if vigilador.tipo_ingreso.normal? and vigilador.fecha_ingreso
       = vigilador.fecha_ingreso.strftime("%d-%m-%Y")
     - else
       = vigilador.tipo_ingreso.etiqueta.titleize
