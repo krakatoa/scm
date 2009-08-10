@@ -79,7 +79,7 @@ class VigiladoresController < ApplicationController
         page[:'tab-set'].replace_html :partial => "menu", :locals => { :grupos => @grupos }
         page.replace "namespace", "<input type=\"hidden\" value=\"#{@namespace}\" name=\"namespace\" id=\"namespace\"/>"
         page.replace_html "vigiladores", :partial => "vigiladores"
-        page.replace_html "xls_export", xls_export_link(:action => @namespace, :search => original_params[:search])
+        page.replace "xls_export", xls_export_link(:action => @namespace, :search => original_params[:search], :filtrar => params[:filtrar])
       end
     else
       respond_to do |wants|
