@@ -69,7 +69,7 @@ class VigiladoresController < ApplicationController
       @search.per_page = nil
       @vigiladores = @search.all
     else
-      @vigiladores = nil
+      @vigiladores = []
     end
 
     if request.xhr?
