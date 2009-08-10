@@ -270,7 +270,11 @@ class VigiladoresController < ApplicationController
     mes_inicial = params[:descuento][:month].to_i
     cant_cuotas = params[:descuento][:cuotas].to_i
     @vigilador.descontar_cuotas!(total, mes_inicial, params[:descuento][:flags], cant_cuotas)
-    redirect_to vigiladores_path
+    if request.xhr?
+      render :nothing => true
+    else
+      redirect_to vigiladores_path
+    end
   end
 
   private

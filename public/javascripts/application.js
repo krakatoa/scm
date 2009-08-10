@@ -3,6 +3,7 @@
 $(document).ajaxComplete(function() {
   bind_links();
   display_datos();
+  display_menu();
   $(".date").datepicker({ dateFormat: 'dd-mm-yy' });
 });
 function bind_links() {
@@ -71,6 +72,24 @@ function bind_links() {
     $("#vigilador_"+id).load($(this).attr("href"));
     return false;
   });
+  $(".descontar-cuotas").unbind("click");
+  $(".descontar-cuotas").click(function() {
+    var id = $(this).attr("value");
+    var href = $(this).attr("href");
+    $("#vigilador_"+id).unbind("ajaxComplete");
+    if (typeof(AUTH_TOKEN) == "undefined") return;
+    $.ajax({
+      type: "POST",
+      url: $("#descuentos_"+id).attr("action"),
+      data: $.param($("#descuentos_"+id).serializeArray()),
+      dataType: "script",
+      success: function() {
+        $("#vigilador_"+id).load(href + "?namespace="+get_namespace()).ajaxComplete(function() {
+          bind_links();
+        });
+      }
+    });
+  });
 }
 $("#vigiladores_table").ready(function() {
   display_datos();
@@ -83,7 +102,7 @@ function display_menu() {
   $("#tab-set > div").hide();
   $("#tab-set > div").eq(0).show();
 
-  var namespace = get_namespace(); //(window.location.toString());
+  var namespace = get_namespace();
   $("ul.tabs a.selected").removeClass('selected');
   $("#tab-set > div").hide();
   $("#"+namespace).fadeIn('slow');
@@ -116,14 +135,6 @@ function get_namespace() {
   var namespace = $("#namespace").attr('value');
   return namespace;
 }
-/*function get_namespace(url) {
-  arr = url.split("/");
-  var ind = arr.length - 1;
-  while (arr[ind] == "") {
-    ind--;
-  };
-  return arr[ind];
-}*/
 function get_namespace_and_number(url) {
   regexp = /\/(\w+\/\d+)/;
   return url.match(regexp)[1].replace("/", "_");
