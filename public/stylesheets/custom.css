@@ -23,7 +23,9 @@ a#link-new img {
 }
 
 .dato.facturado {
-  color: red;
+  font-weight: bold;
+  background: red;
+  color: white;
 }
 
 .pagination a {

@@ -13,6 +13,10 @@ class DatosController < ApplicationController
     @dato = Dato.find(params[:id])
     @dato.facturar!
     Log.log(current_user, :facturacion, @dato.vigilador, @dato)
-    redirect_to vigiladores_path
+    if request.xhr?
+      render :nothing => true
+    else
+      redirect_to vigiladores_path
+    end
   end
 end

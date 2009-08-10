@@ -90,6 +90,24 @@ function bind_links() {
       }
     });
   });
+  $(".facturable").unbind("click");
+  $(".facturable").click(function() {
+    var vigilador_id = $(this).attr("value");
+    var href = $(this).attr("href");
+    $("#vigilador_"+vigilador_id).unbind("ajaxComplete");
+    if (typeof(AUTH_TOKEN) == "undefined") return;
+    $.ajax({
+      type: "POST",
+      url: href,
+      data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN),
+      dataType: "script",
+      success: function() {
+        $("#vigilador_"+vigilador_id).load("/vigiladores/" + vigilador_id + "?namespace="+get_namespace()).ajaxComplete(function() {
+          bind_links();
+        });
+      }
+    });
+  });
 }
 $("#vigiladores_table").ready(function() {
   display_datos();
