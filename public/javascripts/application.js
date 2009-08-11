@@ -16,7 +16,7 @@ $(document).ajaxComplete(function() {
   bind_links();
   display_datos();
   display_menu();
-  $(".date").datepicker({ dateFormat: 'dd-mm-yy' });
+  //$(".date").datepicker({ dateFormat: 'dd-mm-yy' });
   var current_page = parseInt($("#current_page").attr("value"));
   var page_count = parseInt($("#page_count").attr("value"));
   if (current_page < page_count) {
