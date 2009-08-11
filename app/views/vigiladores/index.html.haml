@@ -1,8 +1,30 @@
 #tab-set
   = render :partial => 'vigiladores/menu', :locals => { :grupos => @grupos }
 = render :partial => "filtrar_fecha_ingreso"
+= hidden_field_tag :current_page, 0
+= hidden_field_tag :page_count, 0
+= hidden_field_tag :search_query, ""
 #vigiladores
-  = render :partial => "vigiladores/vigiladores"
+  %div= xls_export_link
+  %table
+    %thead
+      %th{:style => "width:60px; background: transparent;" }
+      %th{:style => "width:100px; background: transparent;" }
+      %th{:style => "width:20px; background: transparent;" }
+      %th{:style => "width:40px;"}= "Legajo"
+      %th{:style => "width: 80px;"}= "Apellido"
+      %th{:style => "width: 100px;"}= "Nombre"
+      %th{:style => "width: 80px;"}= "DNI"
+      %th{:style => "width: 80px;"}= "Fecha Ingreso"
+      - @children_groups.each do |g|
+        - g.accesos.each do |a|
+          - e = a.elemento
+          %th{:style => "width: 40px;", :class => "dato #{get_css(a)}"}
+            = e.etiqueta
+            - if e.is_a? ElementoGestionTramites
+              %span#porcentaje_gestion_tramites= "#{VariacionPorcentajeGestion.porcentaje_actual}"
+              = "%"
+              = link_to_function "modificar", :onclick => "popup_modificacion_porcentaje()" if current_user.is_a? AdminUser
+    = render :partial => "vigiladores/vigiladores"
 = link_to_remote "Agregar nuevo vigilador #{image_tag("add.png")}", :url => new_vigilador_path, :method => "get", :html => { :id => "link-new" }
 %br
-=# page_links

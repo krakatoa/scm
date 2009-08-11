@@ -6,6 +6,7 @@ class Grupo < ActiveRecord::Base
   has_many :elementos, :through => :accesos
 
   named_scope :parents, {:conditions => {:parent_id => nil}}
+  named_scope :children, {:conditions => ["parent_id is not ?", nil]}
 
   validates_presence_of :etiqueta
 

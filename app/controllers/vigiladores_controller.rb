@@ -11,6 +11,8 @@ class VigiladoresController < ApplicationController
   def index
     original_params = params
     @grupos = Grupo.parents.user_allowed(current_user)
+    @children_groups = []
+    @grupos.each{|g| g.children_groups.each{|g| @children_groups << g}}
 
     # TODO Refactorizar filtros ! :) JS tambien :)
     begin
@@ -33,53 +35,69 @@ class VigiladoresController < ApplicationController
     rescue
     end
 
-    # 0 => Fecha Ingreso
-    # 1 => Fecha Baja
-    # 2 => Apellido
-    # 3 => Nombre
-    # 4 => Legajo
     if params.has_key?(:search) and params[:search].has_key?(:conditions)
-      unless params[:filtrar] == "0" # Legajo
-        params[:search][:conditions].delete(:legajo_like) if params[:search][:conditions].has_key?(:nombre_like)
-      end
-      unless params[:filtrar] == "1" # Fecha Ingreso
-        params[:search][:conditions].delete(:fecha_ingreso_greater_than_or_equal_to) if params[:search][:conditions].has_key?(:fecha_ingreso_greater_than_or_equal_to)
-        params[:search][:conditions].delete(:fecha_ingreso_less_than_or_equal_to) if params[:search][:conditions].has_key?(:fecha_ingreso_less_than_or_equal_to)
-      end
-      unless params[:filtrar] == "2" # Fecha Baja
-        if params[:search][:conditions].has_key? :datos
-          params[:search][:conditions][:datos].delete(:fecha_greater_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_greater_than_or_equal_to)
-          params[:search][:conditions][:datos].delete(:fecha_less_than_or_equal_to) if params[:search][:conditions][:datos].has_key?(:fecha_less_than_or_equal_to)
+      old_conditions = params[:search][:conditions]
+      new_conditions = {}
+      case params[:filtrar]
+      when "0" # Legajo
+        new_conditions[:legajo_like] = old_conditions[:legajo_like] unless old_conditions[:legajo_like].blank?
+      when "1" # Fecha Ingreso
+        new_conditions[:fecha_ingreso_greater_than_or_equal_to] = old_conditions[:fecha_ingreso_greater_than_or_equal_to] unless old_conditions[:fecha_ingreso_greater_than_or_equal_to].blank?
+        new_conditions[:fecha_ingreso_less_than_or_equal_to] = old_conditions[:fecha_ingreso_less_than_or_equal_to] unless old_conditions[:fecha_ingreso_less_than_or_equal_to].blank?
+      when "2" # Fecha Baja
+        if old_conditions.has_key? :datos
+          new_conditions[:datos] = {}
+          new_conditions[:datos][:fecha_greater_than_or_equal_to] = old_conditions[:datos][:fecha_greater_than_or_equal_to] unless old_conditions[:datos][:fecha_greater_than_or_equal_to].blank?
+          new_conditions[:datos][:fecha_less_than_or_equal_to] = old_conditions[:datos][:fecha_less_than_or_equal_to] unless old_conditions[:datos][:fecha_less_than_or_equal_to].blank?
         end
+      when "3" # Apellido
+        new_conditions[:apellido_like] = old_conditions[:apellido_like] unless old_conditions[:apellido_like].blank?
+      when "4" # Nombre
+        new_conditions[:nombre_like] = old_conditions[:nombre_like] unless old_conditions[:nombre_like].blank?
       end
-      unless params[:filtrar] == "3" # Apellido
-        params[:search][:conditions].delete(:apellido_like) if params[:search][:conditions].has_key?(:apellido_like)
-      end
-      unless params[:filtrar] == "4" # Nombre
-        params[:search][:conditions].delete(:nombre_like) if params[:search][:conditions].has_key?(:nombre_like)
-      end
+      params[:search].delete :conditions
+      params[:search].store("conditions", new_conditions)
     end
 
     if params.has_key? :filtrar
       @search = Vigilador.new_search(params[:search])
-      if @search.order_by.blank? and @search.order_as.blank?
-        @search.order_by = [ :apellido ]
-        @search.order_as = 'ASC'
+      if params[:search].has_key?(:page) || (params.has_key?(:format) && params[:format].eql?("xls"))
+        if @search.order_by.blank? and @search.order_as.blank?
+          @search.order_by = [ :apellido ]
+          @search.order_as = 'ASC'
+        end
+        if params[:search].has_key?(:page)
+          @search.per_page = 10
+        else
+          @search.per_page = nil
+        end
+        @vigiladores = @search.all
+      else
+        @vigiladores = []
       end
-      @search.per_page = nil
-      @vigiladores = @search.all
     else
-      @search = Vigilador.new_search
+      @search = Vigilador.new_search({:limit => 10})
       @vigiladores = []
     end
 
     if request.xhr?
-      render :update do |page|
-        Vigilador.with_user_editando(current_user_session.user).each(&:desbloquear!)
-        page[:'tab-set'].replace_html :partial => "menu", :locals => { :grupos => @grupos }
-        page.replace "namespace", "<input type=\"hidden\" value=\"#{@namespace}\" name=\"namespace\" id=\"namespace\"/>"
-        page.replace_html "vigiladores", :partial => "vigiladores"
-        page.replace "xls_export", xls_export_link(:action => @namespace, :search => original_params[:search], :filtrar => params[:filtrar])
+      if params.has_key? :search and params[:search].has_key? :page
+        render :partial => "vigiladores/vigiladores", :locals => {:vigiladores => @vigiladores}
+      else
+        if params.has_key?(:search) && !params[:search][:conditions].empty?
+          @page_count = @search.page_count
+        else
+          @page_count = 0
+        end
+        render :update do |page|
+          Vigilador.with_user_editando(current_user_session.user).each(&:desbloquear!)
+          page[:'tab-set'].replace_html :partial => "menu", :locals => { :grupos => @grupos }
+          page.replace "namespace", "<input type=\"hidden\" value=\"#{@namespace}\" name=\"namespace\" id=\"namespace\"/>"
+          page.replace "page_count", "<input type=\"hidden\" value=\"#{@page_count}\" name=\"page_count\" id=\"page_count\"/>"
+          page.replace "current_page", "<input type=\"hidden\" value=\"0\" name=\"current_page\" id=\"current_page\"/>"
+          page.replace_html "search_query", {:search => params[:search]}.to_param
+          page.replace "xls_export", xls_export_link({:action => @namespace, :search => original_params[:search], :filtrar => params["filtrar"]})
+        end
       end
     else
       respond_to do |wants|

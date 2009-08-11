@@ -2,7 +2,7 @@
   %li.label= "Menu"
   - grupos.each do |ge|
     %li<
-      = link_to_remote ge.etiqueta, { :url => { :action => ge.namespace, :search => params[:search] }, :method => "get", :html => {:name => "#{ge.namespace}"} }
+      = link_to_remote ge.etiqueta, { :url => { :action => ge.namespace, :search => params[:search], :filtrar => params[:filtrar] }, :method => "get", :html => {:name => "#{ge.namespace}"} }
 - grupos.each do |ge|
   %div{:id => "#{ge.namespace}"}
     %ul.menuitem

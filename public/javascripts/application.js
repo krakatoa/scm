@@ -1,6 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function() {
+  set_environment();
   $("#working").ajaxStart(function() {
     $(this).show();
   });
@@ -8,20 +9,47 @@ $(document).ready(function() {
     $(this).hide();
   });
 });
+//$(document).ajaxStart(function() {
+  //unbind_links();
+//});
 $(document).ajaxComplete(function() {
   bind_links();
   display_datos();
   display_menu();
   $(".date").datepicker({ dateFormat: 'dd-mm-yy' });
+  var current_page = parseInt($("#current_page").attr("value"));
+  var page_count = parseInt($("#page_count").attr("value"));
+  if (current_page < page_count) {
+    if (current_page == 0) {
+      jQuery.each($("#vigiladores table tr"), function() {
+        $(this).remove();
+      });
+    }
+    if ($("#search_query").html() != "") {
+      current_page++;
+      var query = "?filtrar="+ $("#filtrar").attr("value") +"&namespace="+get_namespace() + "&search%5Bpage%5D="+ current_page + "&"+$("#search_query").html();
+      $.get("/" + get_environment() + "/vigiladores" +query, function(data) {
+        $("#vigiladores table").append(data);
+        $("#current_page").attr("value", current_page);
+      });
+    }
+  }
 });
-function bind_links() {
+function unbind_links() {
   $("a.link-alta").unbind("click");
+  $("a.link-edit").unbind("click");
+  $("a.link-save").unbind("click");
+  $(".descontar-cuotas").unbind("click");
+  $(".facturable").unbind("click");
+}
+function bind_links() {
+  unbind_links();
   $("a.link-alta").click(function() {
     var vigilador_id = get_first_id($(this).attr("href"));
     $("#alta_vigilador_"+vigilador_id+"").load($(this).attr("href").replace("edit", "alta"));
     return false;
   });
-  $("a.link-edit").unbind("click");
+  
   $("a.link-edit").click(function () {
     var vigilador_id = get_first_id($(this).attr("href"));
 
@@ -42,7 +70,7 @@ function bind_links() {
             if (typeof(AUTH_TOKEN) == "undefined") return;
             $.ajax({
               type: "PUT",
-              url: "/datos/"+dato_id,
+              url: "/" + get_environment() + "/datos/"+dato_id,
               data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN)+"&dato["+campo+"]="+valor,
               dataType: "script"
             });
@@ -54,25 +82,17 @@ function bind_links() {
     });
     return false;
   });
-  $("a.link-save").unbind("click");
   $("a.link-save").click(function () {
     $(this).hide();
     var id = get_first_id($(this).attr("href"));
 
     // desbloquear vigilador
     if (typeof(AUTH_TOKEN) == "undefined") return;
-    $.ajax({
-      type: "POST",
-      url: $(this).attr("href") + "/desbloquear",
-      data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN),
-      dataType: "script"
-    });
-    $("#vigilador_"+id).unbind("ajaxComplete");
-    $("#vigilador_"+id).load("" + $(this).attr("href") + "?namespace="+get_namespace()).ajaxComplete(function() {
-      bind_links();
-    });
     $("a.link-edit").show();
     $("#link-new").show();
+    $.post($(this).attr("href") + "/desbloquear?authenticity_token=" + encodeURIComponent(AUTH_TOKEN));
+    $("#vigilador_"+id).unbind("ajaxComplete");
+    $("#vigilador_"+id).load("" + $(this).attr("href") + "?namespace="+get_namespace());
     return false;
   });
   $(".link-no_ingreso").click(function () {
@@ -80,7 +100,6 @@ function bind_links() {
     $("#vigilador_"+id).load($(this).attr("href"));
     return false;
   });
-  $(".descontar-cuotas").unbind("click");
   $(".descontar-cuotas").click(function() {
     var id = $(this).attr("value");
     var href = $(this).attr("href");
@@ -93,32 +112,36 @@ function bind_links() {
       dataType: "script",
       success: function() {
         $("#vigilador_"+id).load(href + "?namespace="+get_namespace()).ajaxComplete(function() {
+          //unbind_links();
           bind_links();
         });
       }
     });
   });
-  $(".facturable").unbind("click");
+  jQuery.each($(".facturable"), function() {
+    $(this).removeAttr("onclick");
+  });
   $(".facturable").click(function() {
-    var vigilador_id = $(this).attr("value");
-    var href = $(this).attr("href");
-    $("#vigilador_"+vigilador_id).unbind("ajaxComplete");
+    $(this).hide();
+    var id = $(this).attr("value");
     if (typeof(AUTH_TOKEN) == "undefined") return;
+    $("#vigilador_"+id).unbind("ajaxComplete");
     $.ajax({
       type: "POST",
-      url: href,
+      url: $(this).attr("href"),
       data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN),
       dataType: "script",
       success: function() {
-        $("#vigilador_"+vigilador_id).load("/vigiladores/" + vigilador_id + "?namespace="+get_namespace()).ajaxComplete(function() {
-          bind_links();
-        });
+        $("#vigilador_"+id).load("/" + get_environment() + "/vigiladores/" + id + "?namespace="+get_namespace());
+        return false;
       }
-    });
+    })
+    return false;
   });
 }
-$("#vigiladores_table").ready(function() {
+$("#vigiladores table").ready(function() {
   display_datos();
+  //unbind_links();
   bind_links();
 });
 $("#tab-set").ready(function() {
@@ -165,13 +188,19 @@ function get_namespace_and_number(url) {
   regexp = /\/(\w+\/\d+)/;
   return url.match(regexp)[1].replace("/", "_");
 }
+function set_environment() {
+  window.environment = "pupi" + EMPRESA;
+}
+function get_environment() {
+  return window.environment;
+}
 function popup_modificacion_porcentaje() {
   var valor = prompt('Ingrese nuevo porcentaje (solo valor numerico)');
   if (!isNaN(valor) && valor != null) {
     if (typeof(AUTH_TOKEN) == "undefined") return;
     $.ajax({
       type: "POST",
-      url: "/admin/modificar_porcentaje_gestion",
+      url: "/" + get_environment() + "/admin/modificar_porcentaje_gestion",
       data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN)+"&porcentaje="+valor,
       dataType: "script",
       async: false,

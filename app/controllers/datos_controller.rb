@@ -15,8 +15,6 @@ class DatosController < ApplicationController
     Log.log(current_user, :facturacion, @dato.vigilador, @dato)
     if request.xhr?
       render :nothing => true
-    else
-      redirect_to vigiladores_path
     end
   end
 end

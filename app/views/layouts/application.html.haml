@@ -13,6 +13,7 @@
   = javascript_include_tag "jquery-ui-1.7.1.custom.min"
   = javascript_include_tag "application"
   = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+  = javascript_tag "var EMPRESA = \"#{EMPRESA}\";"
 %body
   - if flash[:notice]
     .notice= flash[:notice]

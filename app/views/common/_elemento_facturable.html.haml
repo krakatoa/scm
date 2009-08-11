@@ -1,2 +1,2 @@
 - unless dato.facturado?
-  = link_to(image_tag("facturar.png"), facturar_dato_path(dato), :class => "facturable", :value => @vigilador.object_id, :method => :post)
+  = link_to(image_tag("facturar.png"), facturar_dato_path(dato), :class => "facturable", :value => dato.vigilador.id, :method => "post")

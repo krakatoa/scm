@@ -10,7 +10,8 @@ module SearchHelper
                 link_to("Exportar #{format}",
                   :action => if options[:action] then options[:action] else action_name end,
                   :format => format,
-                  :search => if options[:search] then options[:search] else nil end),
+                  :search => if options[:search] then options[:search] else nil end,
+                  :filtrar => if options[:filtrar] then options[:filtrar] else nil end),
                 :id => "#{format}_export")
   end
 
