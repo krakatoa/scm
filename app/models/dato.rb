@@ -1,6 +1,6 @@
 class Dato < ActiveRecord::Base
   belongs_to :elemento
-  belongs_to :vigilador
+  belongs_to :vigilador, :touch => true
 
   validates_presence_of :elemento_id, :vigilador_id
 

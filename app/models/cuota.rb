@@ -1,5 +1,5 @@
 class Cuota < ActiveRecord::Base
-  belongs_to :vigilador
+  belongs_to :vigilador, :touch => true
   belongs_to :elemento
 
   attr_reader :total
