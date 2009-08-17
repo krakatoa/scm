@@ -29,7 +29,7 @@ Uso:
 class Acceso < ActiveRecord::Base
   named_scope :with_elemento, lambda { |e| { :conditions => { :elemento_id => e.id } }}
 
-  belongs_to :grupo
+  belongs_to :grupo, :touch => true
   belongs_to :elemento
 
   def self.crear_accesos_a_cuota(elemento_cuota)
