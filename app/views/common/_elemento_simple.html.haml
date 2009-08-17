@@ -1,3 +1,4 @@
-= content_tag(:label, dato.valor, :id => "dato_#{dato.id}_costo", :name => "dato[#{dato.id}][costo]", :style => "width: 50px;", :class => "editable")
+= content_tag(:label, dato.valor, :id => "dato_#{dato.id}_costo", :name => "dato[#{dato.id}][costo]", :style => "width: 50px;", :class => class_editable)
 - if dato.elemento.facturable?
-  = render :partial => "common/elemento_facturable", :locals => { :dato => dato }
+  - if not class_editable.blank?
+    = render :partial => "common/elemento_facturable", :locals => { :dato => dato }

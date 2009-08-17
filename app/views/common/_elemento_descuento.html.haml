@@ -4,6 +4,7 @@
   = text_field :descuento, :total, :style => "width: 40px;"
   = hidden_field :descuento, :flags, :value => flags
   = select :descuento, :cuotas, (1..12).collect{|c| [c.to_s, c] }
-%button{:class => "descontar-cuotas", :value => "#{vigilador.id}", :href=>vigilador_path(vigilador)}= "Generar Descuentos"
+- if not class_editable.blank?
+  %button{:class => "descontar-cuotas", :value => "#{vigilador.id}", :href=>vigilador_path(vigilador)}= "Generar Descuentos"
 - if current_user.has_super_edit?
   = link_to "Editar Cuotas", vigilador_cuotas_path(vigilador)

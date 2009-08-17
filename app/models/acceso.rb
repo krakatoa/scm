@@ -46,4 +46,63 @@ class Acceso < ActiveRecord::Base
                     :campo => 'logistica',
                     :acceso => "113317" ) # Solapa Logistica Cuotas
   end
+
+  def permiso_lectura?(user)
+    return true unless self.acceso
+    acl = self.acceso.chars.to_a[Acceso.get_acl_index(user.class)].to_i
+    acl_array = Acceso.get_acl_array(acl)
+    begin
+      return acl_array[0] == 1
+    rescue
+      return false
+    end
+  end
+
+  def permiso_escritura?(user)
+    return true if self.acceso.blank?
+    acl = self.acceso.chars.to_a[Acceso.get_acl_index(user.class)].to_i
+    acl_array = Acceso.get_acl_array(acl)
+    begin
+      return acl_array[1] == 1
+    rescue
+      return false
+    end
+  end
+
+  def permiso_eliminacion?(user)
+    return false unless self.acceso
+    acl = self.acceso.chars.to_a[Acceso.get_acl_index(user.class)].to_i
+    acl_array = Acceso.get_acl_array(acl)
+    begin
+      return acl_array[2] == 1
+    rescue
+      return false
+    end
+  end
+
+  private
+  def self.get_acl_array(val)
+    acl_array = []
+    while val > 0 do
+      acl_array.push(val % 2)
+      val /= 2
+    end
+    return acl_array
+  end
+
+  def self.get_acl_index(klass)
+    pos = nil
+    if klass == SueldosUser
+      pos = 1
+    elsif klass == ContabilidadUser
+      pos = 2
+    elsif klass == LogisticaUser
+      pos = 3
+    elsif klass == RecursosHumanosUser
+      pos = 4
+    elsif klass == AdminUser
+      pos = 5
+    end
+    return pos
+  end
 end

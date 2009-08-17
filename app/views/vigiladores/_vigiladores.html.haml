@@ -1,4 +1,4 @@
 - if @vigiladores.size > 0
   - @vigiladores.each do |vigilador|
-    - cache "#{vigilador.cache_key}-#{@grupo.cache_key}" do
+    - cache "#{current_user.class.name}-#{vigilador.cache_key}-#{@grupo.cache_key}" do
       = render :partial => "vigiladores/vigilador", :locals => { :vigilador => vigilador }
