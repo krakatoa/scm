@@ -54,6 +54,8 @@ class VigiladoresController < ApplicationController
         new_conditions[:apellido_like] = old_conditions[:apellido_like] unless old_conditions[:apellido_like].blank?
       when "4" # Nombre
         new_conditions[:nombre_like] = old_conditions[:nombre_like] unless old_conditions[:nombre_like].blank?
+      when "5" # Desertores
+        new_conditions[:tipo_ingreso_id] = TipoIngreso.no_ingreso_id
       end
       params[:search].delete :conditions
       params[:search].store("conditions", new_conditions)

@@ -3,7 +3,7 @@
   - remote_form_for @search, :url => vigiladores_path, :html => {:method => "get", :id => "filtrar_fecha_ingreso"} do |f|
     = hidden_field_tag :namespace, @namespace
     %label= "Filtrar por:"
-    = select_tag :filtrar, options_for_select([["Legajo", 0], ["Fecha Ingreso",1], ["Fecha Baja", 2], ["Apellido",3], ["Nombre",4]])
+    = select_tag :filtrar, options_for_select([["Legajo", 0], ["Fecha Ingreso",1], ["Fecha Baja", 2], ["Apellido",3], ["Nombre",4], ["Desertores",5]])
     - f.fields_for @search.conditions do |vigiladores|
       %br
       %label= "Legajo"
@@ -11,12 +11,10 @@
       %br
       %label= "Fecha Baja desde"
       - vigiladores.fields_for :datos do |dato_fields|
-        =# hidden_field_tag :search_conditions_datos_elemento_id, :name => "search[conditions][datos][elemento_id]", :value => ElementoFecha.find_by_etiqueta("Baja")
         = select_date(Date.today, {:use_month_names => %w{Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre }, :prefix => 'search[conditions][datos][fecha_greater_than_or_equal_to]'})
       %br
       %label= "Fecha Baja hasta"
       - vigiladores.fields_for :datos do |dato_fields|
-        =# hidden_field_tag :search_conditions_datos_elemento_id, :name => "search[conditions][datos][elemento_id]", :value => ElementoFecha.find_by_etiqueta("Baja")
         = select_date(Date.today, {:use_month_names => %w{Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre }, :prefix => 'search[conditions][datos][fecha_less_than_or_equal_to]'})
       %br
       %label= "Fecha Ingreso desde"
@@ -30,5 +28,7 @@
       %br
       %label= "Nombre"
       = vigiladores.text_field :nombre_like
+      %br
+      %label= "Desertores"
       %br
       = submit_tag "Filtrar"
