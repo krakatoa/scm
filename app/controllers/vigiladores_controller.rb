@@ -294,8 +294,9 @@ class VigiladoresController < ApplicationController
 
     total = params[:descuento][:total].to_i
     mes_inicial = params[:descuento][:month].to_i
+    ano_inicial = params[:descuento][:year].to_i
     cant_cuotas = params[:descuento][:cuotas].to_i
-    @vigilador.descontar_cuotas!(total, mes_inicial, params[:descuento][:flags], cant_cuotas)
+    @vigilador.descontar_cuotas!(total, mes_inicial, ano_inicial, params[:descuento][:flags], cant_cuotas)
     if request.xhr?
       render :nothing => true
     else

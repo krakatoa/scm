@@ -1,6 +1,6 @@
 #tab-set
   = render :partial => 'vigiladores/menu', :locals => { :grupos => @grupos }
-= render :partial => "filtrar_fecha_ingreso"
+= render :partial => "busqueda"
 = hidden_field_tag :current_page, 0
 = hidden_field_tag :page_count, 0
 = hidden_field_tag :search_query, ""

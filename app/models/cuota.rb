@@ -4,6 +4,9 @@ class Cuota < ActiveRecord::Base
 
   attr_reader :total
 
+  def mes; elemento.mes; end
+  def ano; elemento.ano; end
+
   def total
     self.recursos_humanos + self.logistica
   end

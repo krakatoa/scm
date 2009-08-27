@@ -52,14 +52,16 @@ class Vigilador < ActiveRecord::Base
     gestion_tramites_dato.save!
   end
 
-  def descontar_cuotas!(total, mes_inicial, flags, cant_cuotas=1)
+  def descontar_cuotas!(total, mes_inicial, ano_inicial, flags, cant_cuotas=1)
     if flags == "rrhh"
       campo = :recursos_humanos
     elsif flags == "logistica"
       campo = :logistica
     end
     valor_cuota = total / cant_cuotas
-    a_descontar = self.cuotas.select {|c| (c.elemento.mes >= mes_inicial) && (c.elemento.mes < mes_inicial + cant_cuotas)}
+
+    indice_primer_cuota = self.cuotas.index(self.cuotas.select{|c| c.mes == mes_inicial && c.ano == ano_inicial}.first)
+    a_descontar = self.cuotas[indice_primer_cuota..indice_primer_cuota + cant_cuotas]
     return false if a_descontar.size != cant_cuotas
 
     a_descontar.each do |cuota|
