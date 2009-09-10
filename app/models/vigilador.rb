@@ -61,7 +61,7 @@ class Vigilador < ActiveRecord::Base
     valor_cuota = total / cant_cuotas
 
     indice_primer_cuota = self.cuotas.index(self.cuotas.select{|c| c.mes == mes_inicial && c.ano == ano_inicial}.first)
-    a_descontar = self.cuotas[indice_primer_cuota..indice_primer_cuota + cant_cuotas]
+    a_descontar = self.cuotas[indice_primer_cuota..indice_primer_cuota + cant_cuotas - 1]
     return false if a_descontar.size != cant_cuotas
 
     a_descontar.each do |cuota|
